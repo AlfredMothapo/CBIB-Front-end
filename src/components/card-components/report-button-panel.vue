@@ -22,6 +22,7 @@
 <script>
 import { deleteReport } from '../../utils/data-access';
 import reportCreateDialog from '../pop-up-dialogs/report-create-dialog.vue';
+import { contextState } from '../../state-machine';
 
 export default {
   name: 'report-button-panel',
@@ -51,7 +52,7 @@ export default {
     },
     modifyReport() {
       // change ID and open dialog
-      this.$emit('changeReportContext', 'updating');
+      this.$emit('changeReportContext', contextState.UPDATE);
       this.$store.dispatch('changeAddReportDialog');
     },
   },

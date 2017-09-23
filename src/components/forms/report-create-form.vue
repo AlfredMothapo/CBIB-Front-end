@@ -3,7 +3,7 @@
 <template id="report-create-form">
   <v-card class="text-xs-center">
     <author-create-dialog></author-create-dialog>
-    <report-create-form-toolbar slot="header" @close="close"></report-create-form-toolbar>
+
     <!-- Input Form -->
     <v-card flat fluid class="ma-3 pa-0">
         <h6 class="text-xs-left">New Research Output</h6>
@@ -29,8 +29,8 @@
       <v-btn flat class="ma-0 pa-0" @click="submit">submit</v-btn>
       <v-btn flat class="ma-0 pa-0" @click="clear">clear</v-btn>
     </v-container>
-    
-  </v-card>  
+
+  </v-card>
 </template>
 
 <script>

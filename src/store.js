@@ -15,8 +15,9 @@ export default new Vuex.Store({
     // defines access level (and hence detailed/not detailed views)
     accessLevel: 0,
     // current viewable report id - TODO: change to ReportContext
-    reportContext: null, // { id: 123, state: 'updating' }
-    // dialogContext: 'update',
+    reportContext: null, // { id: 123, state: 'update' }
+    // currently showing modal dialog
+    modalDialog: null,
     // toggles user-create-dialog
     addAuthorDialog: false,
     // toggles report-create-dialog
@@ -33,7 +34,7 @@ export default new Vuex.Store({
     clearReport: state => state.clearReport,
     loggedIn: state => state.loggedIn,
     accesslevel: state => state.accessLevel,
-    ReportContext: state => state.reportContext,
+    reportContext: state => state.reportContext,
     addAuthorDialog: state => state.addAuthorDialog,
     addReportDialog: state => state.addReportDialog,
     logInDialog: state => state.logInDialog,
@@ -70,6 +71,9 @@ export default new Vuex.Store({
     },
     changeShowDetails: (state, boolean) => {
       state.showDetails = boolean;
+    },
+    changeModalDialog: (state, name) => {
+      state.modalDialog = name;
     },
   },
   actions: {
