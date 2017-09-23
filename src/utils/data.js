@@ -75,6 +75,24 @@ export function getResearchOutputsSearch(search) {
   return result;
 }
 
+export function getReportX(id) {
+  return Promise.resolve(getReport(id));
+}
+
+export function newReport() {
+  return {
+    // dialog: false,
+    title: '',
+    type: null,
+    publication_year: null,
+    author: null,
+    coauthors: [],
+    additional_info: '',
+    proof_verified: false,
+    proof_link: '',
+  };
+}
+
 export function getReport(id) {
   // returns report given id
   const reports = getDetailedResearchOutputs();

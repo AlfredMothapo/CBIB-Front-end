@@ -20,7 +20,7 @@ export default new Vuex.Store({
     modalDialog: null,
     // toggles user-create-dialog
     addAuthorDialog: false,
-    // toggles report-create-dialog
+    // toggles report-modify-dialog
     addReportDialog: false,
     // toggles login-dialog
     logInDialog: true,

@@ -4,9 +4,9 @@
   <v-card flat class="text-xs-center">
     <v-card flat fluid class="ml-3 mr-3 mt-0">
       <v-form v-model="valid" ref="basicinfo">
-        <v-text-field label="Title" v-model="title">
+        <v-text-field label="Title" v-model="report.title">
         </v-text-field>
-        <v-select :items="authors" item-text="name" item-value="id" v-model="author" label="Author" autocomplete></v-select>        
+        <v-select :items="authors" item-text="name" item-value="id" v-model="author" label="Author" autocomplete></v-select>
         <v-select label="Co-Authors" v-bind:items="authors" v-model="coauthors" item-text="name" item-value="id" multiple chips max-height="auto" autocomplete>
           <template slot="selection" scope="data">
             <v-chip close @input="data.parent.selectItem(data.item)" :selected="data.selected" class="chip--select-multi" :key="JSON.stringify(data.id)">
@@ -42,6 +42,7 @@ import { getPublicationTypes, getUsers } from '../../utils/data';
 export default {
 
   name: 'basic-info-expander',
+  props: ['report'],
   data() {
     return {
       valid: false,
@@ -72,7 +73,7 @@ export default {
       this.$refs.basicinfo.reset();
     },
     submit() {
-      // send data to report-create-dialog
+      // send data to report-modify-dialog
       this.$emit(this.data);
     },
   },

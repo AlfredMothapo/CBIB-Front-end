@@ -21,7 +21,7 @@
 
 <script>
 import { deleteReport } from '../../utils/data-access';
-import reportCreateDialog from '../pop-up-dialogs/report-create-dialog.vue';
+import reportCreateDialog from '../pop-up-dialogs/report-modify-dialog.vue';
 import { contextState } from '../../state-machine';
 
 export default {

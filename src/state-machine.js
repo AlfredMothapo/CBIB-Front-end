@@ -1,32 +1,28 @@
 
 import store from './store';
 
-const NONE = null;
-const CREATE = 'CREATE';
-const UPDATE = 'UPDATE';
+export const contextState = {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+};
 
-const MODIFY = 'MODIFY';
+export const modalState = {
+  NONE: null,
+  MODIFY: 'MODIFY',
+};
 
+// watch for store changes to modify modalDialoge state
 store.watch(
   state => state.reportContext,
   (reportContext) => {
     if (reportContext) {
-      if (reportContext.state === UPDATE || reportContext.state === CREATE) {
-        store.commit('changeModalDialog', MODIFY);
+      if (reportContext.state === contextState.UPDATE || reportContext.state === contextState.CREATE) {
+        store.commit('changeModalDialog', modalState.MODIFY);
       }
     } else {
       // no context so...
-      store.commit('changeModalDialog', NONE);
+      store.commit('changeModalDialog', modalState.NONE);
     }
   }
 );
 
-export const contextState = {
-  CREATE,
-  UPDATE,
-};
-
-export const modalState = {
-  NONE,
-  MODIFY,
-};

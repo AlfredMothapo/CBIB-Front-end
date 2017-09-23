@@ -1,9 +1,9 @@
-<!-- report-create-dialog -->
+<!-- report-modify-dialog -->
 
 <template>
   <v-dialog v-model="showDialog" persistent width="800">
     <report-create-form-toolbar @close="close"></report-create-form-toolbar>
-    <report-create-form></report-create-form>
+    <report-create-form :report="report"></report-create-form>
   </v-dialog>
 </template>
 
@@ -11,12 +11,14 @@
 import { mapState } from 'vuex';
 import reportCreateForm from '../forms/report-create-form.vue';
 import reportCreateFormToolbar from '../form-components/report-create-form-toolbar.vue';
-import { modalState } from '../../state-machine';
+import { contextState, modalState } from '../../state-machine';
+import { newReport, getReportX } from '../../utils/data';
 
 export default {
-  name: 'report-create-dialog',
+  name: 'report-modify-dialog',
   data() {
     return {
+      report: newReport(),
     };
   },
   components: {
@@ -26,7 +28,22 @@ export default {
   computed: {
     ...mapState({
       showDialog: state => state.modalDialog === modalState.MODIFY,
+      reportContext: state => state.reportContext,
     }),
+  },
+  watch: {
+    reportContext(state) {
+      if (state && state.state === contextState.UPDATE) {
+        // fetch report when updating
+        getReportX(state.id)
+          .then((report) => {
+            this.report = report;
+          });
+      } else {
+        // set to empty report
+        this.report = newReport();
+      }
+    },
   },
   methods: {
     close() {
@@ -34,7 +51,7 @@ export default {
     },
   },
   // changeAddReportDialog() {
-  //   // toggle report-create-dialog
+  //   // toggle report-modify-dialog
   //   this.$store.dispatch('changeAddReportDialog');
   // },
 };

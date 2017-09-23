@@ -31,7 +31,7 @@ export default {
       this.$refs.contentform.reset();
     },
     submit() {
-      // send data to report-create-dialog
+      // send data to report-modify-dialog
       this.$emit(this.data);
     },
     watch: {

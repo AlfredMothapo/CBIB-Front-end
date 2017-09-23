@@ -11,7 +11,7 @@
           <v-expansion-panel invert class="ma-0 pa-0">
             <v-expansion-panel-content>
               <div slot="header">Basic Information</div>
-              <basic-info-expander ref="basicinfo" :clear="clear"></basic-info-expander>
+              <basic-info-expander ref="basicinfo" :report="report" :clear="clear"></basic-info-expander>
             </v-expansion-panel-content>
             <v-expansion-panel-content v-show="this.$store.getters.showDetails">
               <div slot="header">Detailed Information</div>
@@ -45,17 +45,18 @@ import researchOutputContentExpander from '../expanders/research-output-content-
 export default {
 
   name: 'report-create-form',
+  props: ['report'],
   data() {
     return {
-      dialog: false,
-      title: '',
-      type: 0,
-      publication_year: 1990,
-      author: 0,
-      coauthors: [],
-      additional_info: '',
-      proof_verified: false,
-      proof_link: '',
+      // dialog: false,
+      // title: '',
+      // type: 0,
+      // publication_year: 1990,
+      // author: 0,
+      // coauthors: [],
+      // additional_info: '',
+      // proof_verified: false,
+      // proof_link: '',
     };
   },
   components: {
@@ -107,7 +108,7 @@ export default {
       //   });
     },
     changeAddReportDialog() {
-      // toggle report-create-dialog
+      // toggle report-modify-dialog
       this.$store.dispatch('changeAddReportDialog');
     },
     changeAddAuthorDialog() {
