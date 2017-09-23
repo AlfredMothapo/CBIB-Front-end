@@ -39,9 +39,11 @@ export default {
   created() {
     // NB: using local data
     // set id of report to view
-    const id = this.$store.getters.reportID;
+    const id = this.$store.getters.reportContext && this.$store.getters.reportContext.id;
     // get report
-    this.output = getReport(id);
+    if (id) {
+      this.output = getReport(id);
+    }
     // getReport(id)
     //   .then((output) => {
     //     this.output = output[0];

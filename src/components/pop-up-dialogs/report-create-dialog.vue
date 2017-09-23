@@ -1,7 +1,7 @@
 <!-- report-create-dialog -->
 
 <template>
-  <v-dialog v-model="this.$store.getters.addReportDialog" persistent width="800">
+  <v-dialog v-model="showDialog" persistent width="800">
     <report-create-form></report-create-form>
   </v-dialog>
 </template>
@@ -13,11 +13,17 @@ export default {
   name: 'report-create-dialog',
   data() {
     return {
-      // nothing for now
     };
   },
   components: {
     reportCreateForm,
+  },
+  watch: {
+    showDialog() {
+      console.log(this);
+      const dialogContext = this.$store && this.$store.getters.reportContext && this.$store.getters.reportContext.state;
+      return dialogContext === 'updating' || dialogContext === 'creating';
+    },
   },
   changeAddReportDialog() {
     // toggle report-create-dialog

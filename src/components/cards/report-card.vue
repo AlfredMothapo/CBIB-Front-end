@@ -13,7 +13,7 @@
       </v-layout>
     </v-container>
     <report-body v-show="show" :body="item.additional_info"></report-body>
-    <report-button-panel @changereportID="change" @toggleShowMsg="toggleShow"></report-button-panel>
+    <report-button-panel @changeReportContext="change" @toggleShowMsg="toggleShow"></report-button-panel>
     <v-divider></v-divider>
   </v-card>
 </template>
@@ -41,13 +41,13 @@ export default {
   },
   methods: {
     toggleShow() {
-      // toggel abstract view
+      // toggle abstract view
       this.show = !this.show;
     },
-    change() {
+    change(state) {
       // change view ID
       // done here because button-panel doesn't receive data
-      this.$store.dispatch('changereportID', this.item.id);
+      this.$store.dispatch('changeReportContext', { id: this.item.id, state });
     },
   },
 };

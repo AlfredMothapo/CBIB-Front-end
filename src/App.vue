@@ -31,7 +31,7 @@
         <login-dialog v-show="!this.$store.getters.unsuccessfulLoginDialog"></login-dialog>
         <router-view v-show="!this.$store.getters.logInDialog"></router-view>
         <report-create-dialog></report-create-dialog> 
-        <v-btn v-show="!this.$store.getters.logInDialog && this.$store.getters.showDetails" class="pink" dark fixed bottom right fab @click.native="changeAddReportDialog">
+        <v-btn v-show="!this.$store.getters.logInDialog && this.$store.getters.showDetails" class="pink" dark fixed bottom right fab @click.native="changeReportContext">
           <v-icon>add</v-icon>
         </v-btn>
       </v-container>
@@ -62,9 +62,9 @@ export default {
     unsuccessfulLoginDialog,
   },
   methods: {
-    changeAddReportDialog() {
+    changeReportContext() {
       // toggle report-create0dialog
-      this.$store.dispatch('changeAddReportDialog');
+      this.$store.dispatch('changeReportContext', { id: null, state: 'creating' });
     },
   },
 };
