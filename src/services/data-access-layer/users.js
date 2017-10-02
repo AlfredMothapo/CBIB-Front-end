@@ -79,9 +79,9 @@ export function newUser() {
     id: lastUserId++,
     first_name: '',
     last_name: '',
-    email: '',
+    email: null,
     password: '',
-    accessLevel: 0,
+    accessLevel: '0',
     node: null,
   };
 }

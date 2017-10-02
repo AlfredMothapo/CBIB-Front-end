@@ -43,6 +43,8 @@ export default {
             this.user = user;
             this.user.accessLevel = level;
           });
+      } else if (state && state.state === contextState.CREATE) {
+        this.user = newUser();
       }
     },
   },

@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       node: newNode(),
-    }
+    };
   },
   components: {
     nodeModifyForm,
@@ -41,6 +41,8 @@ export default {
           .then((node) => {
             this.node = node;
           });
+      } else if (state && state.state === contextState.CREATE) {
+        this.node = newNode();
       }
     },
   },

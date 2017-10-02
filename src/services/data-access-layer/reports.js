@@ -78,7 +78,9 @@ export function getResearchOutputsSearch(search) {
       const result = [];
       for (const report of reports) {
         for (const key of Object.keys(report)) {
-          if (report[key] === search) {
+          if (typeof report[key] === 'string' && report[key].toLowerCase() === search.toLowerCase()) {
+            result.push(report);
+          } else if (report[key] === search) {
             result.push(report);
           }
         }
