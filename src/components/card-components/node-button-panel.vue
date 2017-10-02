@@ -8,9 +8,7 @@
       <v-spacer></v-spacer>
       <v-card flat class="text-xs-right">
         <v-btn small flat @click.native="modifyNode">
-          Modify</v-btn>
-        <v-btn small flat primary @click.native="deleteNode">
-          Delete Node</v-btn>
+          Modify Node</v-btn>
       </v-card>
     </v-layout>
   </v-card>

@@ -38,17 +38,32 @@ export default {
       // on unsuccessful, show dialog
       login(this)
         .then((user) => {
-          if (!user) {
+          this.$store.dispatch('changeAccessLevel', user.accessLevel);
+          this.$store.dispatch('changeLoggedInUserID', user.id);
+          this.$store.dispatch('changeLoggedIn', true);
+          this.$store.dispatch('changeLogInDialog', false);
+          this.$router.push('/');
+          this.$refs.loginform.reset();
+        })
+        .catch((error) => {
+          if (error && error.message === 'Invalid login') {
             this.$store.dispatch('toggleUnsuccessfulLogin');
           } else {
-            this.$store.dispatch('changeAccessLevel', user.accessLevel);
-            this.$store.dispatch('changeLoggedInUserID', user.id);
-            this.$store.dispatch('changeLoggedIn', true);
-            this.$store.dispatch('changeLogInDialog', false);
-            this.$router.push('/');
-            this.$refs.loginform.reset();
+            console.log('Handle other error', error);
           }
         });
+      // .then((user) => {
+      //   if (!user) {
+      //     this.$store.dispatch('toggleUnsuccessfulLogin');
+      //   } else {
+      //     this.$store.dispatch('changeAccessLevel', user.accessLevel);
+      //     this.$store.dispatch('changeLoggedInUserID', user.id);
+      //     this.$store.dispatch('changeLoggedIn', true);
+      //     this.$store.dispatch('changeLogInDialog', false);
+      //     this.$router.push('/');
+      //     this.$refs.loginform.reset();
+      //   }
+      // });
     },
     guestAccess() {
       // set access level to observer, continue to home, reset login form

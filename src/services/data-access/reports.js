@@ -98,7 +98,8 @@ export function newReport() {
   };
 }
 
-export function getBasicReport(id) {
+export function getReport(id) {
+  // TODO: Change back to basic
   // returns report given id
   return axios
     .get(`http://localhost:3000/basic-research-output/${id}`)

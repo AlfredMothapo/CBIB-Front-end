@@ -1,12 +1,33 @@
 import axios from 'axios';
 // import { getUsers } from './users';
+import { URL_PREFIX } from './constants';
 
-export function login(data) { // data is email and password
+function url(...parts) {
+  return [URL_PREFIX || ''].concat(parts).join('/');
+}
+
+function requestError(error) {
+  console.log(error);
+  // throw error;
+}
+
+export function login(data) {
+  // data is email and password
   // checks login details and return user or 0
   return axios
-    .post('http://localhost:3000/login', data)
-    .then(response => response.data)
-    .catch(error => console.log(error));
+    .post(url('login'), {
+      email: data.email,
+      password: data.password })
+    .catch(requestError)
+    .then((response) => {
+      // if (response.status === 400) {
+      //   throw new Error('Invalid login');
+      // }
+      if (response.status === 400) {
+        throw new Error('Invalid login');
+      }
+      return response.data;
+    });
 }
 
 export function getVerificationDetails(report) {

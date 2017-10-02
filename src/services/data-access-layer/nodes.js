@@ -16,7 +16,7 @@ export function getNodes() {
 
 export function getNodesWithUsers() {
   return Promise      // axios
-    .resolve(nodes)   //  .get('/api/users')
+    .resolve(nodes)   // .get('/api/users')
     .then(results =>
       Promise.all(
         results.map(result =>
