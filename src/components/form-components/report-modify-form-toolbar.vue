@@ -6,7 +6,7 @@
     <div class="heading">{{ title }}</div>
     <v-spacer></v-spacer> <!-- NOTE: places close button to the right -->
     <v-btn icon @click.native="close">
-      <v-icon class="text-xs-center">close</v-icon>
+      <v-icon class="icon-modify">close</v-icon>
     </v-btn>
   </v-system-bar>
 

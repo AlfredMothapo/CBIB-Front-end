@@ -8,10 +8,12 @@
     <v-container fluid class="ma-0 pa-0">
       <v-layout row>
         <p class="pa-0 ma-0">{{ researchOutput.author }}</p>
-        <p class="pa-0 ma-0 ml-2 mr-2 grey--text">|</p>
+        <!-- <p class="pa-0 ma-0 ml-2 mr-2 grey--text">|</p> -->
+        <p class="pa-0 ma-0 ml-2 grey--text">{{ researchOutput.coauthors }}</p>
+        <v-spacer></v-spacer>
         <p class="pa-0 ma-0 grey--text">{{ researchOutput.type }}</p>
         <p class="pa-0 ma-0 ml-2 grey--text">|</p>
-        <p class="pa-0 ma-0 ml-2 grey--text">{{ researchOutput.publication_year }}</p>
+        <p class="pa-0 ma-0 ml-2 mr-4 grey--text">{{ researchOutput.publication_year }}</p>
       </v-layout>
     </v-container>
   </v-card>

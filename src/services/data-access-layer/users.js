@@ -33,6 +33,22 @@ export function getAuthorName(id) {
     });
 }
 
+export function getCoAuthorsNames(...id) {
+  // returns an array of user objects
+  return getUsers()
+    .then((result) => {
+      let coauthorNamesString = '';
+      for (let i = 0; i < id[0].length; i++) {
+        for (const user of result) {
+          if (user.id === id[0][i]) {
+            coauthorNamesString += `${user.first_name} ${user.last_name} `;
+          }
+        }
+      }
+      return coauthorNamesString;
+    });
+}
+
 export function postUser(data) {
   const _data = cloneObject(data);
   lastUserId++;

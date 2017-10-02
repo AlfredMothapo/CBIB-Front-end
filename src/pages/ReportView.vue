@@ -19,9 +19,9 @@
   <report-body :body="output"></report-body>
   <v-divider></v-divider>
   <v-card flat>
-    <v-card-text>{{ output.text }}</v-card-text>
+    <v-card-text v-if="output.text !== ''">{{ output.text }}</v-card-text>
   </v-card>
-  <v-layout row>
+  <v-layout row pt-1>
     <a class="pl-3" ref="document" target="_blank">Document</a><br/>
     <a class="pl-3" href="https://bitcoin.org/bitcoin.pdf">BibTeX</a>
     <a class="pl-3" href="https://bitcoin.org/bitcoin.pdf" download="bitcoin">Download</a>
@@ -58,7 +58,7 @@ export default {
       getReport(this.reportContext.id)
         .then((output) => {
           _this.output = output;
-          _this.$refs.document.href = output.pdf;
+          _this.$refs.document.href = output.pdf_link;
         });
     } else {
       this.output = newReport();

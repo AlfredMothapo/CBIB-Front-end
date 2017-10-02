@@ -57,15 +57,12 @@ export default {
   watch: {
     loggedInUserID(state) {
       if (this.report.author_id === state) {
-        console.log(this.report.author_id);
         this.showButtons = true;
       }
     },
   },
   mounted() {
     if (this.report.author_id === this.$store.getters.loggedInUserID) {
-      console.log('Author Id', this.report.author_id);
-      console.log('Store', this.$store.getters.loggedInUserID);
       this.showButtons = true;
     }
   },

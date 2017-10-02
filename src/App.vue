@@ -96,7 +96,7 @@ export default {
       this.$router.push('/search');
     },
     add() {
-      if (this.$route.path === '/' || this.$route.path === '/search') {
+      if (this.$route.path === '/' || this.$route.path === '/search' || this.$route.path === '/report') {
         this.changeReportContext();
       } else if (this.$route.path === '/manage-users') {
         this.changeUserContext(contextState.CREATE);
@@ -108,31 +108,27 @@ export default {
 };
 </script>
 <style>
-  /* .toolbar__content {
-    background-color: rgb(84,110,122);
-  } */
-  .report__body {
-    background-color: rgb(207,216,220) !important;
-  }
   .list__tile__title {
     font-weight: 400;
     color: black !important;
   }
+  
   .subheading {
     font-size: 15px !important;
     font-weight: 400;
   }
+  
   .heading {
     font-size: 18px !important;
     font-weight: 500;
   }
+  
   .gray--icon {
     color: gray !important;
   }
-  
-.input-group--text-field input,
-.input-group--text-field textarea {
-  caret-color: rgb(69, 90, 100);
-}
+
+  .icon-modify {
+    position:absolute !important;
+  }
 
 </style>
