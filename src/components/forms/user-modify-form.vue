@@ -87,9 +87,13 @@ export default {
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     submit() {
+      const level = (typeof this.user.accessLevel !== 'number') ? parseInt(String(this.user.accessLevel), 10) : this.user.accessLevel;
+      this.user.accessLevel = level;
       this.$emit('submit');
     },
     modify() {
+      const level = (typeof this.user.accessLevel !== 'number') ? parseInt(String(this.user.accessLevel), 10) : this.user.accessLevel;
+      this.user.accessLevel = level;
       this.$emit('modify');
     },
   },

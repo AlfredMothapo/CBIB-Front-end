@@ -39,7 +39,9 @@ export default {
         // fetch report when updating
         getUser(state.id)
           .then((user) => {
+            const level = (typeof user.accessLevel !== 'string') ? user.accessLevel.toString(10) : user.accessLevel;
             this.user = user;
+            this.user.accessLevel = level;
           });
       }
     },

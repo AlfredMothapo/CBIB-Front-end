@@ -18,6 +18,7 @@ export function getDetailedResearchOutputs() {
             getVerificationDetails(output),
           ])
             .then(([author, type, node, verificationDetails]) => {
+              output.author_id = output.author;
               output.author = author;
               output.type = type;
               output.node = node;

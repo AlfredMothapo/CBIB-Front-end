@@ -6,7 +6,7 @@
       <report-header slot="header" :researchOutput="item"></report-header>
       <report-details class="pl-3" :details="item"></report-details>
       <report-body class="pl-3" :body="item"></report-body>
-      <report-button-panel :reportID="item.id"></report-button-panel>
+      <report-button-panel :report="item"></report-button-panel>
     </v-expansion-panel-content>
   </v-expansion-panel>
 </template>

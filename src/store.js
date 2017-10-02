@@ -25,7 +25,7 @@ export default new Vuex.Store({
     // toggles login-dialog
     logInDialog: true,
     // defines logged in user ID
-    loggedInUserID: 0,
+    loggedInUserID: null,
     // state used to toggle display of detailed information based on accessLevel
     showDetails: false,
     buttonDetails: false,
