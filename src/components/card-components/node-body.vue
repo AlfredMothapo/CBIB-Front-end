@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { getAuthorName } from '../../services/data-access-layer';
+import { getAuthorName } from '../../services/data-access';
 
 export default {
   name: 'node-body',

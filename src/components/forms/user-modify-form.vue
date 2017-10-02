@@ -39,7 +39,7 @@ import reportModifyFormToolbar from '../form-components/report-modify-form-toolb
 import userModifyConfirmationDialog from '../pop-up-dialogs/user-modify-confirmation-dialog.vue';
 import userConfirmClearDialog from '../pop-up-dialogs/user-confirm-clear-dialog.vue';
 import { contextState } from '../../state-machine';
-import { postUser, getNodes } from '../../services/data-access-layer';
+import { postUser, getNodes } from '../../services/data-access';
 
 export default {
 

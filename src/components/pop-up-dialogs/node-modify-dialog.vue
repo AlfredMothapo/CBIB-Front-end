@@ -12,7 +12,7 @@
 <script>
 import { mapState } from 'vuex';
 import { contextState, modalState } from '../../state-machine';
-import { newNode, postNode, updateNode, getNode } from '../../services/data-access-layer';
+import { newNode, postNode, updateNode, getNode } from '../../services/data-access';
 import nodeModifyForm from '../forms/node-modify-form.vue';
 import nodeModifyFormToolbar from '../form-components/node-modify-form-toolbar.vue';
 

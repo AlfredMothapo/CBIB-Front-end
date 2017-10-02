@@ -14,7 +14,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { getResearchOutputsSearch } from '../services/data-access-layer';
+import { getResearchOutputsSearch } from '../services/data-access';
 import reportList from '../components/app-components/report-list.vue';
 
 export default {

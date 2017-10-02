@@ -12,7 +12,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { deleteUser } from '../../services/data-access-layer';
+import { deleteUser } from '../../services/data-access';
 import { modalState } from '../../state-machine';
 
 export default {
