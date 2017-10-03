@@ -4,7 +4,7 @@ import { getAuthorName } from './users';
 export function postNode(data) {
   const _data = cloneObject(data);
   lastNodeId++;
-  _data.id = lastNodeId;
+  _data.node_id = lastNodeId;
   nodes.push(_data);
   return Promise.resolve();
 }
@@ -34,7 +34,7 @@ export function getNodeName(id) {
     return getNodes()
       .then((result) => {
         for (const node of result) {
-          if (node.id === id) {
+          if (node.node_id === id) {
             return node.name;
           }
         }
@@ -47,7 +47,7 @@ export function getNode(id) {
   return Promise.resolve(nodes)
     .then((nodes) => {
       for (const node of nodes) {
-        if (node.id === id) {
+        if (node.node_id === id) {
           return node;
         }
       }
@@ -56,7 +56,7 @@ export function getNode(id) {
 
 export function deleteNode(data) {
   const _data = cloneObject(data);
-  const index = nodes.findIndex(x => x.id === _data);
+  const index = nodes.findIndex(x => x.node_id === _data);
   if (index > -1) {
     nodes.splice(index, 1);
   }
@@ -65,7 +65,7 @@ export function deleteNode(data) {
 
 export function updateNode(data) {
   const _data = cloneObject(data);
-  const index = nodes.findIndex(x => x.id === _data.id);
+  const index = nodes.findIndex(x => x.node_id === _data.node_id);
   if (index > -1) {
     nodes[index] = _data;
   }
@@ -74,7 +74,7 @@ export function updateNode(data) {
 
 export function newNode() {
   return {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: '',
     description: '',
     location: '',
@@ -85,28 +85,28 @@ export function newNode() {
 let lastNodeId = 0;
 export const nodes = [
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'UCT',
     description: 'Center for AI.',
     location: 'Cape Town',
     nodeAdmin: 2,
   },
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'Wits',
     description: 'Center for AI in Human Robotics',
     location: 'Pretoria',
     nodeAdmin: 2,
   },
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'Stellenbosch',
     description: 'Research Institute of AI',
     location: 'Western Cape',
     nodeAdmin: 1,
   },
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'UJ',
     description: 'Partners of Stellenbosch Node',
     location: 'Johannesburg',

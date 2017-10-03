@@ -106,6 +106,7 @@ export function newReport() {
     proof_verified: false,
     proof_link: '',
     pdf_link: '',
+    text: '',
   };
 }
 

@@ -17,7 +17,7 @@ export function getUsersWithNodes() {
     .then(results =>
       Promise.all(
         results.map(result =>
-          getNodeName(result.node)
+          getNodeName(result.node_id)
             .then((node) => {
               result.nodeName = node;
               return result;
@@ -31,7 +31,7 @@ export function getAuthorName(id) {
     .get('http://localhost:3000/get-users')
     .then((result) => {
       for (const user of result) {
-        if (user.id === id) {
+        if (user.user_id === id) {
           return `${user.first_name} ${user.last_name}`;
         }
       }
@@ -40,7 +40,7 @@ export function getAuthorName(id) {
 
 export function postUser(data) {
   return axios
-    .post('http://localhost:3000/create-account', {
+    .post('http://localhost:3000/create-user', {
       first_name: data.first_name,
       last_name: data.last_name,
       email: data.email,
@@ -65,15 +65,23 @@ export function deleteUser(data) {
 
 export function getUser(id) {
   return axios
-    .get(`http://localhost:3000/account-details/${id}`)
+    .get(`http://localhost:3000/get-user/${id}`)
     .then(response => response.data)
     .catch(error => console.log(error));
 }
 
 export function updateUser(data) {
-  const id = data.id;
+  const id = data.user_id;
   return axios
-    .post(`http://localhost:3000/edit-account/${id}`, data)
+    .post(`http://localhost:3000/update-user/${id}`,
+      {
+        user_id: data.user_id,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        access_id: data.access_id,
+        node_id: data.node_id,
+      })
     .then(response => console.log(response))
     .catch(error => console.log(error));
 }
@@ -84,7 +92,7 @@ export function newUser() {
     last_name: '',
     email: '',
     password: '',
-    accessLevel: 0,
-    node: null,
+    access_id: 0,
+    node_id: null,
   };
 }

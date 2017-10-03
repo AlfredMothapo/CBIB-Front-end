@@ -8,7 +8,7 @@ export function getPublicationType(id) {
   return getPublicationTypes()
     .then((result) => {
       for (const pub of result) {
-        if (pub.id === id) {
+        if (pub.type_id === id) {
           return pub.name;
         }
       }

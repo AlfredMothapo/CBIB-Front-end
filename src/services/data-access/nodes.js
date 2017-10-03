@@ -58,16 +58,23 @@ export function deleteNode(id) {
     .catch(error => console.log(error));
 }
 
-export function updateNode(id) {
+export function updateNode(data) {
+  const id = data.node_id;
   return axios
-    .post(`http://localhost:3000/update-node/${id}`)
+    .post(`http://localhost:3000/update-node/${id}`,
+      {
+        node_id: data.node_id,
+        name: data.name,
+        description: data.description,
+        location: data.location,
+        nodeAdmin: data.nodeAdmin,
+      })
     .then(response => response.status)
     .catch(error => console.log(error));
 }
 
 export function newNode() {
   return {
-    id: lastNodeId++,
     name: '',
     description: '',
     location: '',
@@ -78,28 +85,28 @@ export function newNode() {
 let lastNodeId = 0;
 export const nodes = [
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'UCT',
     description: 'Center for AI.',
     location: 'Cape Town',
     nodeAdmin: 2,
   },
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'Wits',
     description: 'Center for AI in Human Robotics',
     location: 'Pretoria',
     nodeAdmin: 2,
   },
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'Stellenbosch',
     description: 'Research Institute of AI',
     location: 'Western Cape',
     nodeAdmin: 1,
   },
   {
-    id: lastNodeId++,
+    node_id: lastNodeId++,
     name: 'UJ',
     description: 'Partners of Stellenbosch Node',
     location: 'Johannesburg',

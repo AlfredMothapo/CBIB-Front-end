@@ -55,9 +55,10 @@ export default {
     if (this.reportContext) {
       getReport(this.reportContext.id)
         .then((output) => {
-          _this.output = output;
-          _this.$refs.document.href = output.pdf_link;
-          _this.$refs.documentDownload.href = output.pdf_link;
+          console.log(output.data);
+          _this.output = output.data[0];
+          // _this.$refs.document.href = output.pdf_link;
+          // _this.$refs.documentDownload.href = output.pdf_link;
         });
     } else {
       this.output = newReport();

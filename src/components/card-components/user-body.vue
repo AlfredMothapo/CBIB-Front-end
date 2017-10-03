@@ -17,7 +17,7 @@ export default {
   props: ['body'],
   computed: {
     userAccessLevel() {
-      return getAccessLevel(this.body.accessLevel);
+      return getAccessLevel(this.body.access_id);
     },
   },
 };

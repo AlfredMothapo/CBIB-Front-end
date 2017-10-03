@@ -13,7 +13,7 @@
       </v-flex>
     </v-layout>
     <v-spacer></v-spacer>
-    <report-list :outputs="posts.outputs"></report-list>
+    <report-list :outputs="posts"></report-list>
   </v-container>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   name: 'home',
   data() {
     return {
-      posts: null,
+      posts: {},
     };
   },
   computed: {
@@ -48,6 +48,7 @@ export default {
       } else {
         getBasicResearchOutputs()
           .then((posts) => {
+            console.log(posts);
             this.posts = posts;
           });
       }
@@ -86,6 +87,7 @@ export default {
       } else {
         getBasicResearchOutputs()
           .then((posts) => {
+            console.log(posts);
             this.posts = posts;
           });
       }

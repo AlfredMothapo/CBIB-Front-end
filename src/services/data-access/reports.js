@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../../store';
 import { cloneObject } from '../../utils/data-utils';
 import { getAuthorName } from './users';
 import { getNodeName } from './nodes';
@@ -8,20 +9,18 @@ import { getPublicationType } from './publication-types';
 export function getDetailedResearchOutputs() {
   // return and array of research outpus objects with details
   return axios
-    .get('http://localhost:3000/detailed-research-outputs')
+    .get('http://localhost:3000/detailed-research-output')
     .then(outputs => Promise.all(
       outputs
         .map(output =>
           Promise.all([
             getAuthorName(output.author),
             getPublicationType(output.type),
-            getNodeName(output.node),
             getVerificationDetails(output),
           ])
-            .then(([author, type, node, verificationDetails]) => {
+            .then(([author, type, verificationDetails]) => {
               output.author = author;
               output.type = type;
-              output.node = node;
               output.proof_verified = verificationDetails;
               return output;
             })
@@ -39,7 +38,19 @@ export function getBasicResearchOutputs() {
 
 export function postResearchOutput(data) {
   return axios
-    .post('http://localhost:3000/outputs', data)
+    .post('http://localhost:3000/outputs',
+      {
+        title: data.title,
+        type: data.type,
+        publication_year: data.publication_year,
+        author: data.author,
+        coauthors: data.coauthors,
+        additional_info: data.additional_info,
+        proof_link: data.proof_link,
+        proof_verified: data.proof_verified,
+        pdf_link: data.pdf_link,
+        text: data.text,
+      })
     .then(response => console.log(response.status))
     .catch(response => console.log(response));
 }
@@ -101,43 +112,43 @@ export function newReport() {
     additional_info: '',
     proof_verified: false,
     proof_link: '',
+    pdf_link: '',
+    text: '',
   };
 }
 
 export function getReport(id) {
-  if (this.$store.getters.accessLevel > 1) {
-    return axios
-      .get(`http://localhost:3000/detailed-research-output/${id}`)
-      .then(output =>
-        Promise.all([
-          getAuthorName(output.author),
-          getPublicationType(output.type),
-          getNodeName(output.node),
-          getVerificationDetails(output),
-        ])
-          .then(([author, type, node, verificationDetails]) => {
-            output.author = author;
-            output.type = type;
-            output.node = node;
-            output.proof_verified = verificationDetails;
-            return output;
-          }))
-      .catch(error => console.log(error));
-  }
   return axios
-    .get(`http://localhost:3000/basic-research-output/${id}`)
+    .get(`http://localhost:3000/detailed-research-output/${id}`)
     .then(output =>
       Promise.all([
         getAuthorName(output.author),
         getPublicationType(output.type),
+        getVerificationDetails(output),
       ])
-        .then(([author, type]) => {
+        .then(([author, type, verificationDetails]) => {
           output.author = author;
           output.type = type;
+          output.proof_verified = verificationDetails;
           return output;
         }))
     .catch(error => console.log(error));
 }
+
+//   return axios
+//     .get(`http://localhost:3000/basic-research-output/${id}`)
+//     .then(output =>
+//       Promise.all([
+//         getAuthorName(output.author),
+//         getPublicationType(output.type),
+//       ])
+//         .then(([author, type]) => {
+//           output.author = author;
+//           output.type = type;
+//           return output;
+//         }))
+//     .catch(error => console.log(error));
+// }
 
 export function getDetailedReport(id) {
   return axios

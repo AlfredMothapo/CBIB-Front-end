@@ -13,7 +13,7 @@ export function getUsersWithNodes() {
     .then(results =>
       Promise.all(
         results.map(result =>
-          getNodeName(result.node)
+          getNodeName(result.node_id)
             .then((node) => {
               result.nodeName = node;
               return result;
@@ -26,7 +26,7 @@ export function getAuthorName(id) {
   return getUsers()
     .then((result) => {
       for (const user of result) {
-        if (user.id === id) {
+        if (user.user_id === id) {
           return `${user.first_name} ${user.last_name}`;
         }
       }
@@ -40,7 +40,7 @@ export function getCoAuthorsNames(...id) {
       let coauthorNamesString = '';
       for (let i = 0; i < id[0].length; i++) {
         for (const user of result) {
-          if (user.id === id[0][i]) {
+          if (user.user_id === id[0][i]) {
             coauthorNamesString += `${user.first_name} ${user.last_name} `;
           }
         }
@@ -52,14 +52,14 @@ export function getCoAuthorsNames(...id) {
 export function postUser(data) {
   const _data = cloneObject(data);
   lastUserId++;
-  _data.id = lastUserId;
+  _data.user_id = lastUserId;
   users.push(_data);
   return Promise.resolve();
 }
 
 export function deleteUser(data) {
   const _data = cloneObject(data);
-  const index = users.findIndex(x => x.id === _data);
+  const index = users.findIndex(x => x.user_id === _data);
   // const index = researchOutputs.indexOf(data);
   if (index > -1) {
     users.splice(index, 1);
@@ -72,7 +72,7 @@ export function getUser(id) {
   return Promise.resolve(users)
     .then((users) => {
       for (const user of users) {
-        if (user.id === id) {
+        if (user.user_id === id) {
           return user;
         }
       }
@@ -81,7 +81,7 @@ export function getUser(id) {
 
 export function updateUser(data) {
   const _data = cloneObject(data);
-  const index = users.findIndex(x => x.id === _data.id);
+  const index = users.findIndex(x => x.user_id === _data.user_id);
   // const index = researchOutputs.indexOf(data);
   if (index > -1) {
     users[index] = _data;
@@ -92,52 +92,52 @@ export function updateUser(data) {
 
 export function newUser() {
   return {
-    id: lastUserId++,
+    user_id: lastUserId++,
     first_name: '',
     last_name: '',
     email: null,
     password: '',
-    accessLevel: '0',
-    node: null,
+    access_id: '0',
+    node_id: null,
   };
 }
 /* ****** USERS CONSTANT ****** */
 let lastUserId = 0;
 export const users = [
   {
-    id: lastUserId++,
+    user_id: lastUserId++,
     first_name: 'Sean',
     last_name: 'Wood',
     email: '1',
     password: '1',
-    accessLevel: 2,
-    node: 1,
+    access_id: 2,
+    node_id: 1,
   },
   {
-    id: lastUserId++,
+    user_id: lastUserId++,
     first_name: 'Emilie',
     last_name: 'Wood',
     email: 'emilie@anotherway.co.za',
     password: '1234',
-    accessLevel: 2,
-    node: null,
+    access_id: 2,
+    node_id: null,
   },
   {
-    id: lastUserId++,
+    user_id: lastUserId++,
     first_name: 'Clinton',
     last_name: 'Wood',
     email: 'clint@anotherway.co.za',
     password: '12345',
-    accessLevel: 1,
-    node: null,
+    access_id: 1,
+    node_id: null,
   },
   {
-    id: lastUserId++,
+    user_id: lastUserId++,
     first_name: 'Caitlin',
     last_name: 'Wood',
     email: 'cait@anotherway.co.za',
     password: '123',
-    accessLevel: 0,
-    node: null,
+    access_id: 0,
+    node_id: null,
   },
 ];
