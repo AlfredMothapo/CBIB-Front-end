@@ -34,7 +34,7 @@ import { mapState } from 'vuex';
 import reportHeader from '../components/card-components/report-header.vue';
 import reportBody from '../components/card-components/report-body.vue';
 import reportDetails from '../components/card-components/report-details.vue';
-import { getReport, newReport } from '../services/data-access-layer';
+import { getReport, newReport } from '../services/data-access';
 
 export default {
   name: 'report',

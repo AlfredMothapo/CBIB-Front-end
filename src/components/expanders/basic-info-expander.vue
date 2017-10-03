@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getPublicationTypes, getUsers } from '../../services/data-access-layer';
+import { getPublicationTypes, getUsers } from '../../services/data-access';
 
 export default {
 

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { getAccessLevel } from '../../services/data-access-layer';
+import { getAccessLevel } from '../../services/data-access';
 
 export default {
   name: 'user-body',

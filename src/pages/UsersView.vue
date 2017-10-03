@@ -17,7 +17,7 @@ import userModifyForm from '../components/forms/user-modify-form.vue';
 import userModifyDialog from '../components/pop-up-dialogs/user-modify-dialog.vue';
 import userDeleteDialog from '../components/pop-up-dialogs/user-delete-dialog.vue';
 import userList from '../components/app-components/user-list.vue';
-import { getUsersWithNodes } from '../services/data-access-layer';
+import { getUsersWithNodes } from '../services/data-access';
 
 export default {
   name: 'user-view',

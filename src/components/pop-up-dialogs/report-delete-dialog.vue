@@ -12,7 +12,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { deleteResearchOutput } from '../../services/data-access-layer';
+import { deleteResearchOutput } from '../../services/data-access';
 import { modalState } from '../../state-machine';
 
 export default {
