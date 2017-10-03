@@ -13,7 +13,7 @@
       </v-flex>
     </v-layout>
     <v-spacer></v-spacer>
-    <report-list :outputs="posts"></report-list>
+    <report-list :outputs="posts.outputs"></report-list>
   </v-container>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   name: 'home',
   data() {
     return {
-      posts: [],
+      posts: null,
     };
   },
   computed: {

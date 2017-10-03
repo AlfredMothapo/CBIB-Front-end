@@ -20,7 +20,8 @@ export function login(data) {
       password: data.password })
     .catch(requestError)
     .then((response) => {
-      if (response.status === 400) { // needs to be changed to whatever the status is when login fails
+      console.log(response.data);
+      if (response.data === 'Wrong login details') { // needs to be changed to whatever the status is when login fails
         throw new Error('Invalid login');
       }
       return response.data;

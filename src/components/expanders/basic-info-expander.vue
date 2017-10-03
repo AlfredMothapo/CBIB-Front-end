@@ -30,7 +30,7 @@
         </v-select>
         <!-- Type and Year -->
         <v-layout row>
-          <v-select :items="types" item-text="name" item-value="id" v-model="report.type" label="Publication Type" autocomplete required></v-select>
+          <v-select :items="types" item-text="type" item-value="type_id" v-model="report.type" label="Publication Type" autocomplete required></v-select>
           <v-spacer></v-spacer>
           <v-text-field label="Year" :rules="yearRules" item-text="publication_year" v-model="report.publication_year" required>
           </v-text-field>
