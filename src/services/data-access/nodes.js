@@ -4,72 +4,65 @@ import { getAuthorName } from './users';
 
 export function postNode(data) {
   return axios
-    .post('http://localhost:3000/create-node', data)
-    .then(response => console.log(response.status))
+    .post('http://localhost:3000/create-node', {
+      name: data.name,
+      location: data.location,
+      description: data.description,
+      nodeAdmin: data.nodeAdmin,
+    })
+    .then(response => response.status)
     .catch(error => console.log(error));
 }
 
 export function getNodes() {
-  // returns an array of user objects
-  return Promise.resolve(nodes);
+  return axios
+    .get('http://localhost:3000/get-nodes')
+    .then(response => response.data)
+    .catch(error => console.log(error));
 }
 
 export function getNodesWithUsers() {
-  return Promise      // axios
-    .resolve(nodes)   //  .get('/api/users')
-    .then(results =>
+  return axios
+    .get('http://localhost:3000/get-nodes')
+    .then(response =>
       Promise.all(
-        results.map(result =>
+        response.map(result =>
           getAuthorName(result.nodeAdmin)
             .then((user) => {
               result.adminName = user;
               return result;
             }))
-      ));
+      ))
+    .catch(error => console.log(error));
 }
 
 export function getNodeName(id) {
   // returns an array of user objects
-  if (id !== null || id === 0) {
-    return getNodes()
-      .then((result) => {
-        for (const node of result) {
-          if (node.id === id) {
-            return node.name;
-          }
-        }
-      });
-  }
-  return Promise.resolve('None');
+  return axios
+    .get(`http://localhost:3000/get-node/${id}`)
+    .then(response => response.data.name)
+    .catch(error => console.log(error));
 }
 
 export function getNode(id) {
-  return Promise.resolve(nodes)
-    .then((nodes) => {
-      for (const node of nodes) {
-        if (node.id === id) {
-          return node;
-        }
-      }
-    });
+  return axios
+    .get(`http://localhost:3000/get-node/${id}`)
+    .then(response => response.data)
+    .catch(error => console.log(error));
 }
 
-export function deleteNode(data) {
-  const _data = cloneObject(data);
-  const index = nodes.findIndex(x => x.id === _data);
-  if (index > -1) {
-    nodes.splice(index, 1);
-  }
-  return Promise.resolve();
+export function deleteNode(id) {
+  return axios
+    .delete(`http://localhost:3000/delete-node/${id}`)
+    .then(response => response.status)
+    .catch(error => console.log(error));
 }
 
-export function updateNode(data) {
-  const _data = cloneObject(data);
-  const index = nodes.findIndex(x => x.id === _data.id);
-  if (index > -1) {
-    nodes[index] = _data;
-  }
-  return Promise.resolve();
+export function updateNode(id) {
+  return axios
+    .post(`http://localhost:3000/update-node/${id}`)
+    .then(response => response.status)
+    .catch(error => console.log(error));
 }
 
 export function newNode() {

@@ -43,7 +43,6 @@ export default {
         // const this = this;
         getDetailedResearchOutputs()
           .then((posts) => {
-            console.log(posts);
             this.posts = posts;
           });
       } else {

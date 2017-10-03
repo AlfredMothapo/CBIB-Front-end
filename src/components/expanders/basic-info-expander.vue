@@ -70,11 +70,12 @@ export default {
       .then((types) => { this.types = types; });
     getUsers()
       .then((users) => {
-        this.authors = users.map(u => {
+        this.authors = users.map((u) => {
           u.name = `${u.first_name} ${u.last_name}`;
           return u;
-        })
-      });
+        });
+      })
+      .catch(error => console.log(error));
   },
   methods: {
     clear() {

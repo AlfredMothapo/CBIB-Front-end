@@ -46,22 +46,28 @@ export function postResearchOutput(data) {
 
 export function deleteResearchOutput(data) {
   return axios
-    .post(`http://localhost:3000/delete_research/${data}`)
+    .delete(`http://localhost:3000/delete-research/${data}`)
     .then(response => console.log(response.status))
     .catch(error => console.log(error));
 }
 
 export function updateResearchOutput(data) {
-  // Backend??
-  console.log(data);
-  // const _data = cloneObject(data);
-  // const index = researchOutputs.findIndex(x => x.id === _data.id);
-  // // const index = researchOutputs.indexOf(data);
-  // if (index > -1) {
-  //   researchOutputs[index] = _data;
-  // }
-  // // researchOutputs.push(_data);
-  // return Promise.resolve();
+  const id = data.id;
+  return axios
+    .post(`http://localhost:3000/update-research-output/${id}`, {
+      id: data.id,
+      title: data.title,
+      type: data.type,
+      publication_year: data.publication_year,
+      additional_info: data.additional_info,
+      author: data.author,
+      coauthors: data.coauthors,
+      proof_verified: data.proof_verified,
+      proof_link: data.proof_link,
+      pdf_link: data.pdf_link,
+    })
+    .then(response => response.status)
+    .catch(error => console.log(error));
 }
 
 export function getResearchOutputsSearch(search) {
@@ -99,8 +105,25 @@ export function newReport() {
 }
 
 export function getReport(id) {
-  // TODO: Change back to basic
-  // returns report given id
+  if (this.$store.getters.accessLevel > 1) {
+    return axios
+      .get(`http://localhost:3000/detailed-research-output/${id}`)
+      .then(output =>
+        Promise.all([
+          getAuthorName(output.author),
+          getPublicationType(output.type),
+          getNodeName(output.node),
+          getVerificationDetails(output),
+        ])
+          .then(([author, type, node, verificationDetails]) => {
+            output.author = author;
+            output.type = type;
+            output.node = node;
+            output.proof_verified = verificationDetails;
+            return output;
+          }))
+      .catch(error => console.log(error));
+  }
   return axios
     .get(`http://localhost:3000/basic-research-output/${id}`)
     .then(output =>

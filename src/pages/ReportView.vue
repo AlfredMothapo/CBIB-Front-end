@@ -23,8 +23,8 @@
   </v-card>
   <v-layout row pt-1>
     <a class="pl-3" ref="document" target="_blank">Document</a><br/>
-    <a class="pl-3" href="https://bitcoin.org/bitcoin.pdf">BibTeX</a>
-    <a class="pl-3" href="https://bitcoin.org/bitcoin.pdf" download="bitcoin">Download</a>
+    <!-- <a class="pl-3" href="https://bitcoin.org/bitcoin.pdf">BibTeX</a> -->
+    <a class="pl-3" ref="documentDownload" download="Downloaded Report">Download</a>
   </v-layout>
   </v-container>
 </template>
@@ -41,7 +41,6 @@ export default {
   data() {
     return {
       output: newReport(),
-      url: 'https://bitcoin.org/bitcoin.pdf',
     };
   },
   computed: {
@@ -50,7 +49,6 @@ export default {
     }),
   },
   mounted() {
-    // NB: using local data
     // set id of report to view
     // get report
     const _this = this;
@@ -59,6 +57,7 @@ export default {
         .then((output) => {
           _this.output = output;
           _this.$refs.document.href = output.pdf_link;
+          _this.$refs.documentDownload.href = output.pdf_link;
         });
     } else {
       this.output = newReport();
