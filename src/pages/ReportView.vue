@@ -34,7 +34,7 @@ import { mapState } from 'vuex';
 import reportHeader from '../components/card-components/report-header.vue';
 import reportBody from '../components/card-components/report-body.vue';
 import reportDetails from '../components/card-components/report-details.vue';
-import { getReport, newReport } from '../services/data-access';
+import { getReport, newReport } from '../services/data-access-layer';
 
 export default {
   name: 'report',
@@ -55,8 +55,7 @@ export default {
     if (this.reportContext) {
       getReport(this.reportContext.id)
         .then((output) => {
-          console.log(output.data);
-          _this.output = output.data[0];
+          _this.output = output;
           // _this.$refs.document.href = output.pdf_link;
           // _this.$refs.documentDownload.href = output.pdf_link;
         });

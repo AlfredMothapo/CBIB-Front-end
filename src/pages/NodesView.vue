@@ -17,7 +17,7 @@ import { mapState } from 'vuex';
 import nodeModifyDialog from '../components/pop-up-dialogs/node-modify-dialog.vue';
 import nodeDeleteDialog from '../components/pop-up-dialogs/node-delete-dialog.vue';
 import nodeList from '../components/app-components/node-list.vue';
-import { getNodesWithUsers } from '../services/data-access';
+import { getNodesWithUsers } from '../services/data-access-layer';
 
 export default {
   name: 'node-view',

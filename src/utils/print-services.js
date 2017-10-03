@@ -1,7 +1,7 @@
 /* eslint no-undef: 0 */
 /* Print Services for Generating Reports */
 import 'print.js/dist/print.min';
-import { getBasicResearchOutputs, getDetailedResearchOutputs } from '../services/data-access';
+import { getBasicResearchOutputs, getDetailedResearchOutputs } from '../services/data-access-layer';
 
 export function printJSON(json, ...props) {
   // transform into require json

@@ -9,7 +9,7 @@ export function getPublicationType(id) {
     .then((result) => {
       for (const pub of result) {
         if (pub.type_id === id) {
-          return pub.name;
+          return pub.type;
         }
       }
     });
@@ -18,19 +18,19 @@ export function getPublicationType(id) {
 
 export const publicationTypes = [
   {
-    id: 0,
-    name: 'Book',
+    type_id: 0,
+    type: 'Book',
   },
   {
-    id: 1,
-    name: 'Journal',
+    type_id: 1,
+    type: 'Journal',
   },
   {
-    id: 2,
-    name: 'Book Chapter',
+    type_id: 2,
+    type: 'Book Chapter',
   },
   {
-    id: 3,
-    name: 'Paper',
+    type_id: 3,
+    type: 'Paper',
   },
 ];

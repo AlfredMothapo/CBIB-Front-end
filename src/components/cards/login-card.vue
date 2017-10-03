@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { login } from '../../services/data-access';
+import { login } from '../../services/data-access-layer';
 
 export default {
   name: 'login-card',

@@ -12,7 +12,7 @@
 <script>
 import { mapState } from 'vuex';
 import { contextState, modalState } from '../../state-machine';
-import { newUser, getUser, updateUser, postUser } from '../../services/data-access';
+import { newUser, getUser, updateUser, postUser } from '../../services/data-access-layer';
 import userModifyForm from '../forms/user-modify-form.vue';
 import userModifyFormToolbar from '../form-components/user-modify-form-toolbar.vue';
 
@@ -39,9 +39,9 @@ export default {
         // fetch report when updating
         getUser(state.id)
           .then((user) => {
-            const level = (typeof user.accessLevel !== 'string') ? user.accessLevel.toString(10) : user.accessLevel;
+            const level = (typeof user.access_id !== 'string') ? user.access_id.toString(10) : user.access_id;
             this.user = user;
-            this.user.accessLevel = level;
+            this.user.access_id = level;
           });
       } else if (state && state.state === contextState.CREATE) {
         this.user = newUser();

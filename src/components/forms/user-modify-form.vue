@@ -9,7 +9,7 @@
       <v-form ref="createform">
         <!-- Access Levels -->
         <div class="ma-0 pa-0">
-          <v-radio-group hide-details v-model="user.accessLevel" :mandatory="false">
+          <v-radio-group hide-details v-model="user.access_id" :mandatory="false">
             <v-radio label="Global Administrator" value="3"></v-radio>
             <v-radio label="Node Administrator" value="2"></v-radio>
             <v-radio label="CAIR Member" value="1"></v-radio>
@@ -22,7 +22,7 @@
         </v-text-field>
         <v-text-field label="Email" :rules="emailRules" required type="email" v-model="user.email">
         </v-text-field>
-        <v-select v-if="user.accessLevel == 2" required :items="nodes" item-text="name" item-value="id" v-model="user.node" label="Node" autocomplete></v-select>
+        <v-select v-if="user.access_id == 2" required :items="nodes" item-text="name" item-value="node_id" v-model="user.node_id" label="Node" autocomplete></v-select>
       </v-form>
     </v-card>
     <!-- Button Panel -->
@@ -39,7 +39,7 @@ import reportModifyFormToolbar from '../form-components/report-modify-form-toolb
 import userModifyConfirmationDialog from '../pop-up-dialogs/user-modify-confirmation-dialog.vue';
 import userConfirmClearDialog from '../pop-up-dialogs/user-confirm-clear-dialog.vue';
 import { contextState } from '../../state-machine';
-import { postUser, getNodes } from '../../services/data-access';
+import { postUser, getNodes } from '../../services/data-access-layer';
 
 export default {
 
@@ -87,13 +87,13 @@ export default {
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     submit() {
-      const level = (typeof this.user.accessLevel !== 'number') ? parseInt(String(this.user.accessLevel), 10) : this.user.accessLevel;
-      this.user.accessLevel = level;
+      const level = (typeof this.user.access_id !== 'number') ? parseInt(String(this.user.access_id), 10) : this.user.access_id;
+      this.user.access_id = level;
       this.$emit('submit');
     },
     modify() {
-      const level = (typeof this.user.accessLevel !== 'number') ? parseInt(String(this.user.accessLevel), 10) : this.user.accessLevel;
-      this.user.accessLevel = level;
+      const level = (typeof this.user.access_id !== 'number') ? parseInt(String(this.user.access_id), 10) : this.user.access_id;
+      this.user.access_id = level;
       this.$emit('modify');
     },
   },

@@ -20,7 +20,7 @@
 <script>
 import { mapState } from 'vuex';
 import { printOutputs } from '../utils/print-services';
-import { getDetailedResearchOutputs, getBasicResearchOutputs } from '../services/data-access';
+import { getDetailedResearchOutputs, getBasicResearchOutputs } from '../services/data-access-layer';
 import reportList from '../components/app-components/report-list.vue';
 import filterOrderBar from '../components/app-components/filter-order-bar.vue';
 

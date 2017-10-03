@@ -9,11 +9,11 @@
         <v-text-field label="Title" v-model="report.title" required>
         </v-text-field>
         <!-- Author -->
-        <v-select :items="authors" item-text="name" item-value="id" v-model="report.author" label="Author" autocomplete></v-select>
+        <v-select :items="authors" item-text="name" item-value="user_id" v-model="report.author" label="Author" autocomplete></v-select>
         <!-- Co-Author -->
-        <v-select label="Co-Authors" :items="authors" v-model="report.coauthors" item-text="name" item-value="id" multiple chips max-height="auto" autocomplete>
+        <v-select label="Co-Authors" :items="authors" v-model="report.coauthors" item-text="name" item-value="user_id" multiple chips max-height="auto" autocomplete>
           <template slot="selection" scope="data">
-            <v-chip close @input="data.parent.selectItem(data.item)" :selected="data.selected" class="chip--select-multi" :key="JSON.stringify(data.id)">
+            <v-chip close @input="data.parent.selectItem(data.item)" :selected="data.selected" class="chip--select-multi" :key="JSON.stringify(data.user_id)">
               {{ data.item.name }}
             </v-chip>
           </template>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getPublicationTypes, getUsers } from '../../services/data-access';
+import { getPublicationTypes, getUsers } from '../../services/data-access-layer';
 
 export default {
 

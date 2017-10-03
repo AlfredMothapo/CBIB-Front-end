@@ -25,7 +25,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { getUsers, postNode } from '../../services/data-access';
+import { getUsers, postNode } from '../../services/data-access-layer';
 import { contextState } from '../../state-machine';
 import nodeModifyConfirmationDialog from '../pop-up-dialogs/node-modify-confirmation-dialog.vue';
 import nodeConfirmClearDialog from '../pop-up-dialogs/node-confirm-clear-dialog.vue';

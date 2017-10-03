@@ -12,7 +12,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { deleteNode } from '../../services/data-access';
+import { deleteNode } from '../../services/data-access-layer';
 import { modalState } from '../../state-machine';
 
 export default {

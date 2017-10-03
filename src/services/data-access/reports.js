@@ -9,7 +9,7 @@ import { getPublicationType } from './publication-types';
 export function getDetailedResearchOutputs() {
   // return and array of research outpus objects with details
   return axios
-    .get('http://localhost:3000/detailed-research-output')
+    .get('http://localhost:3000/detailed-research-outputs')
     .then(outputs => Promise.all(
       outputs
         .map(output =>
@@ -57,7 +57,7 @@ export function postResearchOutput(data) {
 
 export function deleteResearchOutput(data) {
   return axios
-    .delete(`http://localhost:3000/delete-research/${data}`)
+    .delete(`http://localhost:3000/delete-research-output/${data}`)
     .then(response => console.log(response.status))
     .catch(error => console.log(error));
 }
@@ -76,6 +76,7 @@ export function updateResearchOutput(data) {
       proof_verified: data.proof_verified,
       proof_link: data.proof_link,
       pdf_link: data.pdf_link,
+      text: data.text,
     })
     .then(response => response.status)
     .catch(error => console.log(error));
