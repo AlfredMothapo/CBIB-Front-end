@@ -7,9 +7,9 @@
   </v-card>
   <v-spacer></v-spacer>
   <v-card flat class="text-xs-right">
-    <v-btn v-show="this.showButtons" class="pr-0 mr-0" small flat @click.native="modifyReport">
+    <v-btn v-if="loggedInUserID===this.report.author_id" class="pr-0 mr-0" small flat @click.native="modifyReport">
       Modify</v-btn>
-    <v-btn v-show="showButtons" class="pl-0 ml-0 mr-0 pr-0" small flat @click.native="deleteReport">
+    <v-btn v-if="loggedInUserID===this.report.author_id" class="pl-0 ml-0 mr-0 pr-0" small flat @click.native="deleteReport">
       Delete</v-btn>
     <v-btn class="ml-0 pl-0" primary small flat @click.native="changeReportContext">
       View</v-btn>
@@ -26,11 +26,6 @@ import { contextState } from '../../state-machine';
 export default {
   name: 'report-button-panel',
   props: ['report'],
-  data() {
-    return {
-      showButtons: false,
-    };
-  },
   methods: {
     changeReportContext() {
       // change report context to deal with view and push to report page
@@ -54,22 +49,21 @@ export default {
       loggedInUserID: state => state.loggedInUserID,
     }),
   },
-  watch: {
-    loggedInUserID(state) {
-      if (this.$store.getters.accessLevel > 0) {
-        if (this.report.author_id === state) {
-          this.showButtons = true;
-        }
-      }
-    },
-  },
-  mounted() {
-    if (this.$store.getters.accessLevel > 0) {
-      if (this.report.author_id === this.$store.getters.loggedInUserID) {
-        this.showButtons = true;
-      }
-    }
-  },
+  // watch: {
+  //   loggedInUserID(state) {
+  //     if (this.$store.getters.accessLevel > 0) {
+  //       // this.showButtons = true;
+  //       this.showButtons = (this.report.author_id === state);
+  //     }
+  //   },
+  // },
+  // mounted() {
+  //   if (this.$store.getters.accessLevel > 0) {
+  //     if (this.report.author_id === this.$store.getters.loggedInUserID) {
+  //       this.showButtons = true;
+  //     }
+  //   }
+  // },
 };
 </script>
 

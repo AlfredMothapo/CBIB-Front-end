@@ -39,7 +39,7 @@ export default {
       login(this)
         .then((user) => {
           this.$store.dispatch('changeAccessLevel', user.access_id);
-          this.$store.dispatch('changeLoggedInUserID', user.id);
+          this.$store.dispatch('changeLoggedInUserID', user.user_id);
           this.$store.dispatch('changeLoggedIn', true);
           this.$store.dispatch('changeLogInDialog', false);
           this.$router.push('/');

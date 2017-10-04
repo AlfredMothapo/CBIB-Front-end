@@ -20,6 +20,7 @@ export function getDetailedResearchOutputs() {
             getVerificationDetails(output),
           ])
             .then(([author, type, coauthors, verificationDetails]) => {
+              output.author_id = output.author;
               output.author = author;
               output.type = type.type;
               output.coauthors = coauthors;
@@ -43,6 +44,7 @@ export function getBasicResearchOutputs() {
             getCoAuthorNames(output.coauthors),
           ])
             .then(([author, type, coauthors]) => {
+              output.author_id = output.author;
               output.author = author;
               output.coauthors = coauthors;
               output.type = type.type;
