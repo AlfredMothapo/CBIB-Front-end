@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { cloneObject } from '../../utils/data-utils';
 import { getAuthorName } from './users';
 
 export function postNode(data) {

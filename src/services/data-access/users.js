@@ -38,19 +38,22 @@ export function getAuthorName(id) {
 }
 
 export function getCoAuthorNames(id) {
-  const array = id.split(',');
-  return getUsers()
-    .then((result) => {
-      let coauthorNamesString = '';
-      for (let i = 1; i < array.length; i++) {
-        for (const user of result) {
-          if (user.user_id === parseInt(array[i], 10)) {
-            coauthorNamesString += `${user.first_name} ${user.last_name} `;
+  if (id) {
+    const array = id.split(',');
+    return getUsers()
+      .then((result) => {
+        let coauthorNamesString = '';
+        for (let i = 1; i < array.length; i++) {
+          for (const user of result) {
+            if (user.user_id === parseInt(array[i], 10)) {
+              coauthorNamesString += `${user.first_name} ${user.last_name} `;
+            }
           }
         }
-      }
-      return coauthorNamesString;
-    });
+        return coauthorNamesString;
+      });
+  }
+  return '';
 }
 
 export function postUser(data) {

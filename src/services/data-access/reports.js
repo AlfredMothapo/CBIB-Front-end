@@ -138,20 +138,20 @@ export function newReport() {
 export function getReport(id) {
   return axios
     .get(`http://localhost:3000/detailed-research-output/${id}`)
-    .then(output =>
+    .then(output => output.data)
+    .then(data =>
       Promise.all([
-        getAuthorName(output.author),
-        getPublicationType(output.type),
-        getVerificationDetails(output),
-        getCoAuthorNames(output.coauthors),
+        getAuthorName(data.author),
+        getPublicationType(data.type),
+        getVerificationDetails(data),
+        getCoAuthorNames(data.coauthors),
       ])
         .then(([author, type, verificationDetails, coauthors]) => {
-          output.author = author;
-          output.type = type.type;
-          output.proof_verified = verificationDetails;
-          output.coauthors = coauthors;
-          console.log(output);
-          return output.data;
+          data.author = author;
+          data.type = type.type;
+          data.proof_verified = verificationDetails;
+          data.coauthors = coauthors;
+          return data;
         }))
     .catch(error => console.log(error));
 }

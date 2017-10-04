@@ -12,7 +12,7 @@
         </v-text-field>
         <v-text-field label="Description" v-model="node.description">
         </v-text-field>
-        <v-select :items="users" item-text="name" item-value="id" v-model="node.nodeAdmin" label="Node Administrator" autocomplete></v-select>
+        <v-select :items="users" item-text="name" item-value="user_id" v-model="node.nodeAdmin" label="Node Administrator" autocomplete></v-select>
       </v-form>
     </v-card>
     <!-- Button Panel -->
@@ -25,7 +25,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { getUsers, postNode } from '../../services/data-access';
+import { getUsers } from '../../services/data-access';
 import { contextState } from '../../state-machine';
 import nodeModifyConfirmationDialog from '../pop-up-dialogs/node-modify-confirmation-dialog.vue';
 import nodeConfirmClearDialog from '../pop-up-dialogs/node-confirm-clear-dialog.vue';
