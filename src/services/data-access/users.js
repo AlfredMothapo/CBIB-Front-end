@@ -55,7 +55,7 @@ export function postUser(data) {
       last_name: data.last_name,
       email: data.email,
       access_id: data.access_id,
-      node_id: data.node,
+      node_id: data.node_id,
     })
     .then(response =>response.data)
     .catch(error => console.log(error));
