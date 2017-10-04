@@ -61,8 +61,13 @@ export default {
       if (this.userContext.state === contextState.CREATE) {
         // console.log('post', this.user);
         postUser(this.user)
-          .then(() => {
-            this.close();
+          .then((response) => {
+            console.log(response.body);
+            if (response === 'success') {
+              this.close();
+            } else {
+              this.$store.dispatch('changeConfirmationDialog', contextState.ERRORUSER);
+            }
           });
       } else {
         // console.log('update', this.user);

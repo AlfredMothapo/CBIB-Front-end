@@ -72,8 +72,13 @@ export default {
       }
       if (this.reportContext.state === contextState.UPDATE) {
         updateResearchOutput(report)
-          .then(() => {
-            this.close();
+          .then((response) => {
+            console.log(response);
+            if (response === 'success') {
+              this.close();
+            } else if (response === 'A user with the email address already exists') {
+              this.$store.dispatch('changeConfirmationDialog', contextState.ERRORUSER);
+            }
           })
           .catch(error => console.log(error));
       } else {

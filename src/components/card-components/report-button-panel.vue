@@ -56,14 +56,18 @@ export default {
   },
   watch: {
     loggedInUserID(state) {
-      if (this.report.author_id === state) {
-        this.showButtons = true;
+      if (this.$store.getters.accessLevel > 0) {
+        if (this.report.author_id === state) {
+          this.showButtons = true;
+        }
       }
     },
   },
   mounted() {
-    if (this.report.author_id === this.$store.getters.loggedInUserID) {
-      this.showButtons = true;
+    if (this.$store.getters.accessLevel > 0) {
+      if (this.report.author_id === this.$store.getters.loggedInUserID) {
+        this.showButtons = true;
+      }
     }
   },
 };

@@ -22,7 +22,7 @@
         </v-text-field>
         <v-text-field label="Email" :rules="emailRules" required type="email" v-model="user.email">
         </v-text-field>
-        <v-select v-if="user.access_id == 2" required :items="nodes" item-text="name" item-value="node_id" v-model="user.node_id" label="Node" autocomplete></v-select>
+        <v-select :items="nodes" item-text="name" item-value="node_id" v-model="user.node_id" label="Node" autocomplete></v-select>
       </v-form>
     </v-card>
     <!-- Button Panel -->

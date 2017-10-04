@@ -26,7 +26,7 @@ export function getNodesWithUsers() {
     .get('http://localhost:3000/get-nodes')
     .then(response =>
       Promise.all(
-        response.map(result =>
+        response.data.map(result =>
           getAuthorName(result.nodeAdmin)
             .then((user) => {
               result.adminName = user;

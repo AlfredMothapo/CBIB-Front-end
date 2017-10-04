@@ -16,7 +16,7 @@ export function getUsersWithNodes() {
     .get('http://localhost:3000/get-users')
     .then(results =>
       Promise.all(
-        results.map(result =>
+        results.data.map(result =>
           getNodeName(result.node_id)
             .then((node) => {
               result.nodeName = node;
@@ -28,13 +28,23 @@ export function getUsersWithNodes() {
 export function getAuthorName(id) {
   // returns an array of user objects
   return axios
-    .get('http://localhost:3000/get-users')
+    .get(`http://localhost:3000/get-user/${id}`)
+    .then(result => `${result.data.first_name} ${result.data.last_name}`);
+}
+
+export function getCoAuthorNames(id) {
+  const array = id.split(',');
+  return getUsers()
     .then((result) => {
-      for (const user of result) {
-        if (user.user_id === id) {
-          return `${user.first_name} ${user.last_name}`;
+      let coauthorNamesString = '';
+      for (let i = 1; i < array.length; i++) {
+        for (const user of result) {
+          if (user.user_id === parseInt(array[i], 10)) {
+            coauthorNamesString += `${user.first_name} ${user.last_name} `;
+          }
         }
       }
+      return coauthorNamesString;
     });
 }
 
@@ -44,10 +54,10 @@ export function postUser(data) {
       first_name: data.first_name,
       last_name: data.last_name,
       email: data.email,
-      access_id: data.accessLevel,
+      access_id: data.access_id,
       node_id: data.node,
     })
-    .then(response => console.log(response.status))
+    .then(response =>response.data)
     .catch(error => console.log(error));
 }
 
@@ -93,6 +103,6 @@ export function newUser() {
     email: '',
     password: '',
     access_id: 0,
-    node_id: null,
+    node_id: 0,
   };
 }

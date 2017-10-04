@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../../store';
 import { cloneObject } from '../../utils/data-utils';
-import { getAuthorName } from './users';
+import { getAuthorName, getCoAuthorNames } from './users';
 import { getNodeName } from './nodes';
 import { getVerificationDetails } from './helpers';
 import { getPublicationType } from './publication-types';
@@ -11,16 +11,18 @@ export function getDetailedResearchOutputs() {
   return axios
     .get('http://localhost:3000/detailed-research-outputs')
     .then(outputs => Promise.all(
-      outputs
+      outputs.data
         .map(output =>
           Promise.all([
             getAuthorName(output.author),
             getPublicationType(output.type),
+            getCoAuthorNames(output.coauthors),
             getVerificationDetails(output),
           ])
-            .then(([author, type, verificationDetails]) => {
+            .then(([author, type, coauthors, verificationDetails]) => {
               output.author = author;
-              output.type = type;
+              output.type = type.type;
+              output.coauthors = coauthors;
               output.proof_verified = verificationDetails;
               return output;
             })
@@ -32,7 +34,22 @@ export function getDetailedResearchOutputs() {
 export function getBasicResearchOutputs() {
   return axios
     .get('http://localhost:3000/basic-research-outputs')
-    .then(response => response.data)
+    .then(outputs => Promise.all(
+      outputs.data
+        .map(output =>
+          Promise.all([
+            getAuthorName(output.author),
+            getPublicationType(output.type),
+            getCoAuthorNames(output.coauthors),
+          ])
+            .then(([author, type, coauthors]) => {
+              output.author = author;
+              output.coauthors = coauthors;
+              output.type = type.type;
+              return output;
+            })
+        ))
+    )
     .catch(error => console.log(error));
 }
 
@@ -51,7 +68,7 @@ export function postResearchOutput(data) {
         pdf_link: data.pdf_link,
         text: data.text,
       })
-    .then(response => console.log(response.status))
+    .then(response => response)
     .catch(response => console.log(response));
 }
 
@@ -126,12 +143,15 @@ export function getReport(id) {
         getAuthorName(output.author),
         getPublicationType(output.type),
         getVerificationDetails(output),
+        getCoAuthorNames(output.coauthors),
       ])
-        .then(([author, type, verificationDetails]) => {
+        .then(([author, type, verificationDetails, coauthors]) => {
           output.author = author;
-          output.type = type;
+          output.type = type.type;
           output.proof_verified = verificationDetails;
-          return output;
+          output.coauthors = coauthors;
+          console.log(output);
+          return output.data;
         }))
     .catch(error => console.log(error));
 }
