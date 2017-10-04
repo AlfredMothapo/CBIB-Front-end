@@ -48,11 +48,11 @@ export default {
     // fetch a list of users for nodeAdmin option
     getUsers()
       .then((users) => {
-        this.users = users.map(u => {
-        u.name = `${u.first_name} ${u.last_name}`;
-        return u;
-      }) 
-    });
+        this.users = users.map((u) => {
+          u.name = `${u.first_name} ${u.last_name}`;
+          return u;
+        });
+      });
   },
   computed: {
     ...mapState({

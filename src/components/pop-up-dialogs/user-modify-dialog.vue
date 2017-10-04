@@ -61,14 +61,11 @@ export default {
       if (this.userContext.state === contextState.CREATE) {
         // console.log('post', this.user);
         postUser(this.user)
-          .then((response) => {
-            console.log(response.body);
-            if (response === 'success') {
-              this.close();
-            } else {
-              this.$store.dispatch('changeConfirmationDialog', contextState.ERRORUSER);
-            }
-          });
+          .then(() => {
+            this.close();
+          })
+          // NOTE: Need generic error dialog
+          .catch(() => this.$store.dispatch('changeConfirmationDialog', contextState.ERROR));
       } else {
         // console.log('update', this.user);
         updateUser(this.user)

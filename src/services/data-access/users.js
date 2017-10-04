@@ -29,7 +29,12 @@ export function getAuthorName(id) {
   // returns an array of user objects
   return axios
     .get(`http://localhost:3000/get-user/${id}`)
-    .then(result => `${result.data.first_name} ${result.data.last_name}`);
+    .then((result) => {
+      if (!result.data) {
+        return 'None';
+      }
+      return `${result.data.first_name} ${result.data.last_name}`;
+    });
 }
 
 export function getCoAuthorNames(id) {
@@ -57,7 +62,17 @@ export function postUser(data) {
       access_id: data.access_id,
       node_id: data.node_id,
     })
-    .then(response =>response.data)
+    .then((response) => {
+      console.log(response.data);
+      switch (response.data) {
+        case 'success':
+          return true;
+        case 'A user with the email address already exists':
+          throw new Error('Email Address already exists');
+        default:
+          throw new Error(`Unhandled login error: ${response.data}`);
+      }
+    })
     .catch(error => console.log(error));
 }
 
