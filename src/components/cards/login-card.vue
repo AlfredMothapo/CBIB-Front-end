@@ -67,7 +67,7 @@ export default {
     },
     guestAccess() {
       // set access level to observer, continue to home, reset login form
-      this.$store.dispatch('changeAccessLevel', 2);
+      this.$store.dispatch('changeAccessLevel', 0);
       this.$store.dispatch('changeLogInDialog', false);
       this.$router.push('/');
       this.$refs.loginform.reset();
