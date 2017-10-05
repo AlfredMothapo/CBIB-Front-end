@@ -79,7 +79,7 @@ export default {
         report.author = this.$store.getters.loggedInUserID;
       }
       if (this.reportContext.state === contextState.UPDATE) {
-        // NB: Not implemented for DEMO
+        // NOTE: Not implemented for DEMO
         updateResearchOutput(report)
           .then(() => {
             this.close();

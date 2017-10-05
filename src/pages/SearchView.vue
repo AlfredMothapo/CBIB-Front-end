@@ -31,7 +31,7 @@ export default {
     }),
   },
   created() {
-    // NOTE: Not implemented for DEMO
+    // calls search and updates report list based on search results
     getResearchOutputsSearch(this.searchInput)
       .then((result) => {
         this.posts = result;
@@ -39,6 +39,7 @@ export default {
   },
   watch: {
     searchInput(state) {
+      // watch for change on search input and update report list
       getResearchOutputsSearch(state)
         .then((result) => {
           this.posts = result;

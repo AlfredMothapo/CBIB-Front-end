@@ -106,7 +106,6 @@ export function updateResearchOutput(data) {
 
 export function getResearchOutputsSearch(search) {
   // returns a list of research outputs based on search
-  // NB: Not implemented for DEMO
   return getDetailedResearchOutputs()
     .then((reports) => {
       const result = [];

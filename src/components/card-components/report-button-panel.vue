@@ -33,7 +33,6 @@ export default {
       this.$router.push('./report');
     },
     deleteReport() {
-      // NB: Not used in Demo
       // change report context to deal with delete
       this.$store.dispatch('changeReportContext', { id: this.report.id, state: contextState.DELETE });
     },

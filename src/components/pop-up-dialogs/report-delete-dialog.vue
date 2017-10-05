@@ -29,7 +29,6 @@ export default {
       this.$store.dispatch('changeReportContext', null);
     },
     deleteReport() {
-      // NOTE: Not implemented in DEMO
       // call delete report in data-access
       // close report-modify-dialog on success
       deleteResearchOutput(this.$store.getters.reportContext.id)

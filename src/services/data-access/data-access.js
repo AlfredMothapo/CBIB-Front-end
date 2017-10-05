@@ -1,3 +1,5 @@
+// NOTE: Dummy file used during development - not used
+
 import axios from 'axios';
 
 export function getResearchOutputs() {
