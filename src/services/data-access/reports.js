@@ -79,16 +79,15 @@ export function postResearchOutput(data) {
 export function deleteResearchOutput(data) {
   // deletes the research output at a given id
   return axios
-    .delete(`http://localhost:3000/delete-research-output/${data}`)
+    .get(`http://localhost:3000/delete-research/${data}`)
     .then(response => console.log(response.status))
     .catch(error => console.log(error));
 }
 
 export function updateResearchOutput(data) {
   // updates the research output at a given id
-  const id = data.id;
   return axios
-    .post(`http://localhost:3000/update-research-output/${id}`, {
+    .put('http://localhost:3000/update-research-output/', {
       id: data.id,
       title: data.title,
       type: data.type,
@@ -113,7 +112,11 @@ export function getResearchOutputsSearch(search) {
       const result = [];
       for (const report of reports) {
         for (const key of Object.keys(report)) {
-          if (report[key] === search) {
+          if (typeof report[key] === 'number') {
+            if (report[key].toString() === search) {
+              result.push(report);
+            }
+          } else if (report[key] && report[key].toLowerCase() === search.toLowerCase()) {
             result.push(report);
           }
         }

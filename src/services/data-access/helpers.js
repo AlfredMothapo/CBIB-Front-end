@@ -19,7 +19,6 @@ export function login(data) {
       password: data.password })
     .catch(requestError)
     .then((response) => {
-      console.log(response.data);
       if (response.data === 'Wrong login details') {
         throw new Error('Invalid login');
       }

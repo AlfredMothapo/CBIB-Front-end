@@ -9,8 +9,8 @@
   <v-card flat class="text-xs-right">
     <v-btn v-if="loggedInUserID===this.report.author_id" class="pr-0 mr-0" small flat @click.native="modifyReport">
       Modify</v-btn>
-    <!-- <v-btn v-if="loggedInUserID===this.report.author_id" class="pl-0 ml-0 mr-0 pr-0" small flat @click.native="deleteReport">
-      Delete</v-btn> -->
+    <v-btn v-if="loggedInUserID===this.report.author_id" class="pl-0 ml-0 mr-0 pr-0" small flat @click.native="deleteReport">
+      Delete</v-btn>
     <v-btn class="ml-0 pl-0" primary small flat @click.native="changeReportContext">
       View</v-btn>
   </v-card>

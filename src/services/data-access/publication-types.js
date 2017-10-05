@@ -10,7 +10,6 @@ export function getPublicationTypes() {
 
 export function getPublicationType(id) {
   // returns a publication type given the id
-  console.log(id);
   return axios
     .get(`http://localhost:3000/get-publication-type/${id}`)
     .then(response => response.data)

@@ -39,11 +39,19 @@ export default {
   watch: {
     reportContext(state) {
       if (state && state.state === contextState.UPDATE) {
-        // fetch report when updating (with id's not denormalised names
-        // NB - Not implemented for DEMO
+        // fetch report when updating (with id's not denormalised names)
         getNormalizedReport(state.id)
           .then((report) => {
+            let coauthors = null;
+            const coauthorsArray = [];
+            if (report.coauthors !== '') {
+              coauthors = report.coauthors.split(',');
+              for (let i = 1; i < coauthors.length; i++) {
+                coauthorsArray.push(parseInt(coauthors[i], 10));
+              }
+            }
             this.report = report;
+            this.report.coauthors = coauthorsArray;
           });
       } else {
         // set to empty report
@@ -73,12 +81,8 @@ export default {
       if (this.reportContext.state === contextState.UPDATE) {
         // NB: Not implemented for DEMO
         updateResearchOutput(report)
-          .then((response) => {
-            if (response === 'success') {
-              this.close();
-            } else if (response === 'A user with the email address already exists') {
-              this.$store.dispatch('changeConfirmationDialog', contextState.ERRORUSER);
-            }
+          .then(() => {
+            this.close();
           })
           .catch(error => console.log(error));
       } else {

@@ -15,7 +15,6 @@ export function printJSON(json, ...props) {
 function printBasic() {
   getBasicResearchOutputs()
     .then((result) => {
-      console.log(result);
       printJS({
         printable: result,
         properties: ['title', 'author', 'publication_year', 'type'],
