@@ -63,11 +63,15 @@ export default {
       if (this.userContext.state === contextState.CREATE) {
         // add new user on create
         postUser(this.user)
-          .then(() => {
-            this.close();
+          .then((response) => {
+            if (response === 'A user with the email address already exists') {
+              this.$store.dispatch('changeConfirmationDialog', contextState.ERROR);
+            } else {
+              this.close();
+            }
           })
           // NOTE: Need generic error dialog
-          .catch(() => this.$store.dispatch('changeConfirmationDialog', contextState.ERROR));
+          .catch(() => { console.log('Handle other error'); });
       } else {
         // NOTE: not implemented for DEMO
         // updater user on update

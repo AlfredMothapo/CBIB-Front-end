@@ -68,12 +68,12 @@ export function postUser(data) {
       node_id: data.node_id,
     })
     .then((response) => {
-      console.log(response.data);
       switch (response.data) {
         case 'success':
           return true;
         case 'A user with the email address already exists':
-          throw new Error('Email Address already exists');
+          return response.data;
+        // throw new Error('Email Address already exists');
         default:
           throw new Error(`Unhandled login error: ${response.data}`);
       }
