@@ -71,18 +71,20 @@ export default {
   },
   methods: {
     confirmClear() {
+      // ripple show of clear confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', contextState.CONFIRMNODECLEAR);
     },
     clear() {
-      // clear form data
+      // clear form data and close confirmation dialog
       this.$refs.nodecreateform.reset();
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     submit() {
-      console.log('Node Modify Form: ', this.node.nodeAdmin);
+      // fire parent submit (in node-modify-dialog)
       this.$emit('submit');
     },
     modify() {
+      // fire parent modify (in node-modify-dialog)
       this.$emit('modify');
     },
   },

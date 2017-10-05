@@ -14,11 +14,6 @@
 export default {
 
   name: 'unsuccessful-login-dialog',
-  data() {
-    return {
-      // nothing for now
-    };
-  },
   methods: {
     close() {
       // toggle unsuccessful-login-dialog

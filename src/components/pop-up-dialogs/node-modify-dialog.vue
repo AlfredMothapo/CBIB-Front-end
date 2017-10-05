@@ -36,7 +36,7 @@ export default {
   watch: {
     nodeContext(state) {
       if (state && state.state === contextState.UPDATE) {
-        // fetch report when updating
+        // fetch node when updating
         getNode(state.id)
           .then((node) => {
             this.node = node;
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     submit() {
-      // post node data and on success clear form
+      // check validation on form and show error or confirmation dialogs
       if (this.node.name && this.node.location && this.node.name !== '' && this.node.location !== '') { // checks validity
         this.$store.commit('changeConfirmationDialog', contextState.CONFIRMNODE);
       } else {
@@ -56,13 +56,14 @@ export default {
       }
     },
     modify() {
+      // NOTE: Update not implemented for DEMO
+      // post node data and on success clear form
       if (this.nodeContext.state === contextState.CREATE) {
         postNode(this.node)
           .then(() => {
             this.close();
           });
       } else {
-        console.log('update', this.node);
         updateNode(this.node)
           .then(() => {
             this.close();
@@ -70,9 +71,11 @@ export default {
       }
     },
     clear() {
+      // close confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     close() {
+      // clear form and close node-modify-dialog
       this.$refs.form.clear();
       this.$store.dispatch('changeNodeContext', null);
     },

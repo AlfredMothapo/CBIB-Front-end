@@ -39,7 +39,7 @@ import reportModifyFormToolbar from '../form-components/report-modify-form-toolb
 import userModifyConfirmationDialog from '../pop-up-dialogs/user-modify-confirmation-dialog.vue';
 import userConfirmClearDialog from '../pop-up-dialogs/user-confirm-clear-dialog.vue';
 import { contextState } from '../../state-machine';
-import { postUser, getNodes } from '../../services/data-access';
+import { getNodes } from '../../services/data-access';
 
 export default {
 
@@ -87,17 +87,22 @@ export default {
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     submit() {
+      // convert access id to an integer
+      // fire parent submit (in user-modify-dialog)
       const level = (typeof this.user.access_id !== 'number') ? parseInt(String(this.user.access_id), 10) : this.user.access_id;
       this.user.access_id = level;
       this.$emit('submit');
     },
     modify() {
+      // convert access id to an integer
+      // fire parent modify (in user-modify-dialog)
       const level = (typeof this.user.access_id !== 'number') ? parseInt(String(this.user.access_id), 10) : this.user.access_id;
       this.user.access_id = level;
       this.$emit('modify');
     },
   },
   mounted() {
+    // return a list of nodes to choose from upon mount
     getNodes()
       .then((nodes) => { this.nodes = nodes; });
   },

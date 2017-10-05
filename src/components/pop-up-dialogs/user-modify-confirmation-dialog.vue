@@ -19,11 +19,6 @@ import { contextState } from '../../state-machine';
 
 export default {
   name: 'user-modify-confirmation-dialog',
-  data() {
-    return {
-      // nothing for now
-    };
-  },
   computed: {
     ...mapState({
       showDialog: state => state.confirmationDialog === contextState.CONFIRMUSER || state.confirmationDialog === contextState.ERRORUSER,
@@ -33,9 +28,11 @@ export default {
   },
   methods: {
     close() {
+      // close confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     modifyUser() {
+      // call parent modify method in user-modify-form
       this.$emit('modify');
     },
   },

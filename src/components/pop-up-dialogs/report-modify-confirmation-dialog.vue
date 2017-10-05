@@ -15,17 +15,11 @@
 
 <script>
 import { mapState } from 'vuex';
-// import { deleteResearchOutput } from '../../services/data';
 import { contextState } from '../../state-machine';
 
 export default {
 
   name: 'report-modify-confirmation-dialog',
-  data() {
-    return {
-      // nothing for now
-    };
-  },
   computed: {
     ...mapState({
       showDialog: state => state.confirmationDialog === contextState.CONFIRMREPORT || state.confirmationDialog === contextState.ERRORREPORT,
@@ -35,9 +29,11 @@ export default {
   },
   methods: {
     close() {
+      // close confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     modifyReport() {
+      // call parent modify in report-modify-form
       this.$emit('modify');
     },
   },

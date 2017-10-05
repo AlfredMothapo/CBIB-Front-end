@@ -31,19 +31,16 @@ export default {
     }),
   },
   created() {
+    // NOTE: Not implemented for DEMO
     getResearchOutputsSearch(this.searchInput)
       .then((result) => {
-        // console.log(result);
         this.posts = result;
       });
   },
   watch: {
     searchInput(state) {
-      // console.log('Got to watcher with ', state);
-      // this.posts = getDetailedResearchOutputs();
       getResearchOutputsSearch(state)
         .then((result) => {
-          // console.log(result);
           this.posts = result;
         });
     },

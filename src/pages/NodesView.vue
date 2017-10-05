@@ -38,12 +38,14 @@ export default {
   },
   watch: {
     nodeContext(state) {
+      // watch nodeContext to refresh nodes on update or create
       if (state === null) {
         this.getNodesDetailed();
       }
     },
   },
   mounted() {
+    // get nodes with node names and change tooltip (slightly redundant - could use function)
     getNodesWithUsers()
       .then((nodes) => {
         this.nodes = nodes;
@@ -51,6 +53,9 @@ export default {
     this.$store.dispatch('changeToolTip', 'New Node');
   },
   methods: {
+    // get nodes with user names
+    // change Add button tooltip
+    // refresh search input
     getNodesDetailed() {
       getNodesWithUsers()
         .then((nodes) => {

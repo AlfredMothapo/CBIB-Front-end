@@ -4,7 +4,6 @@
   <v-container fluid>
     <v-layout row>
       <v-flex xs10>
-        <!-- <filter-order-bar></filter-order-bar> -->
       </v-flex>
       <v-flex xs3>
         <v-card style="background-color: transparent" flat fluid class="text-xs-right">
@@ -39,8 +38,8 @@ export default {
   },
   watch: {
     accessLevel(state) {
+      // watch access level to decide what level of detail to display on research outputs
       if (state > 1) {
-        // const this = this;
         getDetailedResearchOutputs()
           .then((posts) => {
             this.posts = posts;
@@ -48,20 +47,21 @@ export default {
       } else {
         getBasicResearchOutputs()
           .then((posts) => {
-            console.log(posts);
             this.posts = posts;
           });
       }
     },
     reportContext(state) {
+      // what report context for reload of research outputs
       if (state === null) {
         this.getResearchOutputs();
       }
     },
   },
   mounted() {
-    // NB: using local data
     // get reports to display in report-list
+    // change Add button tooltip
+    // refresh search input
     this.getResearchOutputs();
     this.$store.dispatch('changeToolTip', 'New Report');
     this.$store.dispatch('changeSearchInput', '');
@@ -74,11 +74,12 @@ export default {
 
   methods: {
     print() {
-      // fire print-services method
+      // fire print-services method for report generation
       printOutputs(this.accessLevel);
     },
     getResearchOutputs() {
-      // NOTE: not working
+      // method to get reports to display in report-list based on access level
+      // used for reloading
       if (this.accessLevel > 1) {
         getDetailedResearchOutputs()
           .then((posts) => {
@@ -87,7 +88,6 @@ export default {
       } else {
         getBasicResearchOutputs()
           .then((posts) => {
-            console.log(posts);
             this.posts = posts;
           });
       }

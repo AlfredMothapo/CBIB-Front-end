@@ -1,5 +1,5 @@
 <!-- user-button-panel -->
-
+<!-- Not Used in Demo -->
 <template id="user-button-panel">
   <v-card flat>
     <v-layout row>

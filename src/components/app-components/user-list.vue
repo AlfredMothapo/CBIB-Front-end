@@ -17,11 +17,6 @@ import userButtonPanel from '../card-components/user-button-panel.vue';
 export default {
   name: 'user-list',
   props: ['outputs'],
-  data() {
-    return {
-      // nothing
-    };
-  },
   components: {
     userBody,
     userButtonPanel,

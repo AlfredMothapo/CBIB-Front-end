@@ -12,7 +12,7 @@
       </v-list-tile-content>
     </v-list-tile>
     <!-- Manage Nodes -->
-    <v-list-tile v-show="this.$store.getters.showDetails" ripple :to="nodes.link">
+    <v-list-tile v-if="this.$store.getters.accessLevel === 2 || this.$store.getters.accessLevel === 3" ripple :to="nodes.link">
       <v-list-tile-action>
         <v-icon class="gray--icon">{{ nodes.icon }}</v-icon>
       </v-list-tile-action>
@@ -21,7 +21,7 @@
       </v-list-tile-content>
     </v-list-tile>
     <!-- Manage Users -->
-    <v-list-tile v-show="this.$store.getters.showDetails" ripple :to="users.link">
+    <v-list-tile v-if="this.$store.getters.accessLevel === 3" ripple :to="users.link">
       <v-list-tile-action>
         <v-icon class="gray--icon">{{ users.icon }}</v-icon>
       </v-list-tile-action>
@@ -38,7 +38,6 @@
         <v-list-tile-title>{{ search.text }}</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-    <!-- Only Available to Node Admins/GlobalAdmins -->
   </v-list>
 </template>
 

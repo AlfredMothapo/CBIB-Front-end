@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import { getAuthorName } from '../../services/data-access';
-
 export default {
   name: 'node-body',
   props: ['body'],
@@ -24,17 +22,6 @@ export default {
     if (this.body.description === '') {
       this.body.description = 'No Description';
     }
-  },
-  methods: {
-    // getAdminName() {
-    //   // TODO: do more efficiently
-    //   if (this.body.nodeAdmin !== null) {
-    //     getAuthorName(this.body.nodeAdmin)
-    //       .then((name) => { this.adminName = name; });
-    //   } else {
-    //     this.adminName = 'No Administrator';
-    //   }
-    // },
   },
 };
 </script>

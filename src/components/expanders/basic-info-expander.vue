@@ -66,6 +66,7 @@ export default {
     };
   },
   created() {
+    // get a list of publication types and users for relative drop-down selections
     getPublicationTypes()
       .then((types) => { this.types = types; });
     getUsers()

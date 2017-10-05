@@ -17,11 +17,6 @@ import nodeButtonPanel from '../card-components/node-button-panel.vue';
 export default {
   name: 'node-list',
   props: ['outputs'],
-  data() {
-    return {
-      // nothing
-    };
-  },
   components: {
     nodeBody,
     nodeButtonPanel,

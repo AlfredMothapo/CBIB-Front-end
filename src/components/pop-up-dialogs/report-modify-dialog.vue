@@ -39,10 +39,10 @@ export default {
   watch: {
     reportContext(state) {
       if (state && state.state === contextState.UPDATE) {
-        // fetch report when updating
+        // fetch report when updating (with id's not denormalised names
+        // NB - Not implemented for DEMO
         getNormalizedReport(state.id)
           .then((report) => {
-            console.log(report);
             this.report = report;
           });
       } else {
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     submit() {
-      // check data before confirming submit
+      // check data before confirming submit, showing error dialog on incorrect data
       if (this.report.title !== '' && this.report.year !== null && this.report.type !== null) {
         this.$store.dispatch('changeConfirmationDialog', contextState.CONFIRMREPORT);
       } else {
@@ -63,17 +63,17 @@ export default {
     modify() {
       const report = this.report;
       // replace nulls with default values
-      // NOTE: Done on Backend?
       if (report.additional_info === '') {
         report.additional_info = 'No abstract available.';
       }
+      // sets default author to current logged in user
       if (report.author === null) {
         report.author = this.$store.getters.loggedInUserID;
       }
       if (this.reportContext.state === contextState.UPDATE) {
+        // NB: Not implemented for DEMO
         updateResearchOutput(report)
           .then((response) => {
-            console.log(response);
             if (response === 'success') {
               this.close();
             } else if (response === 'A user with the email address already exists') {
@@ -90,9 +90,11 @@ export default {
       }
     },
     clear() {
+      // close confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     close() {
+      // close report-modify-dialog
       this.$store.dispatch('changeReportContext', null);
     },
   },

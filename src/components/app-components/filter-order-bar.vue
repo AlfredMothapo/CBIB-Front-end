@@ -1,5 +1,5 @@
 <!-- filter-order-bar -->
-
+<!-- NOT USED -->
 <template id="filter-order-bar">
   <v-container class="ma-0 pa-0">
     <v-layout row left>

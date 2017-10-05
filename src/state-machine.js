@@ -6,7 +6,6 @@ export const contextState = {
   UPDATE: 'UPDATE',
   VIEW: 'VIEW',
   DELETE: 'DELETE',
-  // this is probably wrong
   CONFIRMREPORT: 'CONFIRMREPORT',
   CONFIRMREPORTCLEAR: 'CONFIRMREPORTCLEAR',
   ERRORREPORT: 'ERRORREPORT',
@@ -31,7 +30,7 @@ export const modalState = {
   CREATENODE: 'CREATENODE',
 };
 
-// watch for store changes to modify reportDialog state
+// watch for store changes to modify report state
 store.watch(
   state => state.reportContext,
   (reportContext) => {
@@ -49,7 +48,7 @@ store.watch(
   }
 );
 
-// watch for store changes to modify userDialog state
+// watch for store changes to modify user state
 store.watch(
   state => state.userContext,
   (userContext) => {
@@ -67,7 +66,7 @@ store.watch(
   }
 );
 
-// watch for store changes to modify userDialog state
+// watch for store changes to modify node state
 store.watch(
   state => state.nodeContext,
   (nodeContext) => {

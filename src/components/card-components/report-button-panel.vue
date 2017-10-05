@@ -9,8 +9,8 @@
   <v-card flat class="text-xs-right">
     <v-btn v-if="loggedInUserID===this.report.author_id" class="pr-0 mr-0" small flat @click.native="modifyReport">
       Modify</v-btn>
-    <v-btn v-if="loggedInUserID===this.report.author_id" class="pl-0 ml-0 mr-0 pr-0" small flat @click.native="deleteReport">
-      Delete</v-btn>
+    <!-- <v-btn v-if="loggedInUserID===this.report.author_id" class="pl-0 ml-0 mr-0 pr-0" small flat @click.native="deleteReport">
+      Delete</v-btn> -->
     <v-btn class="ml-0 pl-0" primary small flat @click.native="changeReportContext">
       View</v-btn>
   </v-card>
@@ -33,6 +33,7 @@ export default {
       this.$router.push('./report');
     },
     deleteReport() {
+      // NB: Not used in Demo
       // change report context to deal with delete
       this.$store.dispatch('changeReportContext', { id: this.report.id, state: contextState.DELETE });
     },
@@ -49,21 +50,6 @@ export default {
       loggedInUserID: state => state.loggedInUserID,
     }),
   },
-  // watch: {
-  //   loggedInUserID(state) {
-  //     if (this.$store.getters.accessLevel > 0) {
-  //       // this.showButtons = true;
-  //       this.showButtons = (this.report.author_id === state);
-  //     }
-  //   },
-  // },
-  // mounted() {
-  //   if (this.$store.getters.accessLevel > 0) {
-  //     if (this.report.author_id === this.$store.getters.loggedInUserID) {
-  //       this.showButtons = true;
-  //     }
-  //   }
-  // },
 };
 </script>
 

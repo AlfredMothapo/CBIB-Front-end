@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getAuthorName } from './users';
 
 export function postNode(data) {
+  // posts node to create-node
   return axios
     .post('http://localhost:3000/create-node', {
       name: data.name,
@@ -14,6 +15,7 @@ export function postNode(data) {
 }
 
 export function getNodes() {
+  // gets a list of all nodes with all node data
   return axios
     .get('http://localhost:3000/get-nodes')
     .then(response => response.data)
@@ -21,6 +23,7 @@ export function getNodes() {
 }
 
 export function getNodesWithUsers() {
+  // gets nodes with admin names instead of ids
   return axios
     .get('http://localhost:3000/get-nodes')
     .then(response =>
@@ -36,7 +39,7 @@ export function getNodesWithUsers() {
 }
 
 export function getNodeName(id) {
-  // returns an array of user objects
+  // get the name of a node given the id
   return axios
     .get(`http://localhost:3000/get-node/${id}`)
     .then(response => response.data.name)
@@ -44,6 +47,7 @@ export function getNodeName(id) {
 }
 
 export function getNode(id) {
+  // returns a node's information given the id
   return axios
     .get(`http://localhost:3000/get-node/${id}`)
     .then(response => response.data)
@@ -51,6 +55,7 @@ export function getNode(id) {
 }
 
 export function deleteNode(id) {
+  // deletes the node corresponding to the id
   return axios
     .delete(`http://localhost:3000/delete-node/${id}`)
     .then(response => response.status)
@@ -58,6 +63,7 @@ export function deleteNode(id) {
 }
 
 export function updateNode(data) {
+  // updates a node corresponding to the id
   const id = data.node_id;
   return axios
     .post(`http://localhost:3000/update-node/${id}`,
@@ -73,6 +79,7 @@ export function updateNode(data) {
 }
 
 export function newNode() {
+  // returns the default new node
   return {
     name: '',
     description: '',
@@ -80,35 +87,3 @@ export function newNode() {
     nodeAdmin: null,
   };
 }
-
-let lastNodeId = 0;
-export const nodes = [
-  {
-    node_id: lastNodeId++,
-    name: 'UCT',
-    description: 'Center for AI.',
-    location: 'Cape Town',
-    nodeAdmin: 2,
-  },
-  {
-    node_id: lastNodeId++,
-    name: 'Wits',
-    description: 'Center for AI in Human Robotics',
-    location: 'Pretoria',
-    nodeAdmin: 2,
-  },
-  {
-    node_id: lastNodeId++,
-    name: 'Stellenbosch',
-    description: 'Research Institute of AI',
-    location: 'Western Cape',
-    nodeAdmin: 1,
-  },
-  {
-    node_id: lastNodeId++,
-    name: 'UJ',
-    description: 'Partners of Stellenbosch Node',
-    location: 'Johannesburg',
-    nodeAdmin: 0,
-  },
-];

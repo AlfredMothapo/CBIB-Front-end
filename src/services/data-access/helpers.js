@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { getUsers } from './users';
 import { URL_PREFIX } from './constants';
 
 function url(...parts) {
@@ -13,7 +12,7 @@ function requestError(error) {
 
 export function login(data) {
   // data is email and password
-  // checks login details and return user or 0
+  // checks login details and return user error message
   return axios
     .post(url('login'), {
       email: data.email,
@@ -21,7 +20,7 @@ export function login(data) {
     .catch(requestError)
     .then((response) => {
       console.log(response.data);
-      if (response.data === 'Wrong login details') { // needs to be changed to whatever the status is when login fails
+      if (response.data === 'Wrong login details') {
         throw new Error('Invalid login');
       }
       return response.data;
@@ -29,13 +28,17 @@ export function login(data) {
 }
 
 export function getVerificationDetails(report) {
-  if (report.proof_verified === false) {
-    return 'Not Verified';
+  // checks verification details passed from backend, converts to UI friendly version
+  if (report.proof_verified === 0 || report.proof_verified === 1) {
+    if (report.proof_verified === 0) {
+      return 'Not Verified';
+    }
+    return 'Verified';
   }
-  return 'Verified';
 }
 
 export function getAccessLevel(accessLevel) {
+  // returns UI friendly version of the access level using the id
   const level = (typeof accessLevel !== 'number') ? parseInt(String(accessLevel), 10) : accessLevel;
   if (level === 0) {
     return 'Author';

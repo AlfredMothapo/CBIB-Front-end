@@ -18,11 +18,6 @@ import { modalState } from '../../state-machine';
 export default {
 
   name: 'node-delete-dialog',
-  data() {
-    return {
-      // nothing for now
-    };
-  },
   computed: {
     ...mapState({
       showDialog: state => state.modalDialog === modalState.DELETENODE,
@@ -30,9 +25,13 @@ export default {
   },
   methods: {
     close() {
+      // close node-modify-dialog
       this.$store.dispatch('changeNodeContext', null);
     },
     deleteNode() {
+      // NOTE: Not implemented in DEMO
+      // call delete node in data-access
+      // close node-modify-dialog on success
       deleteNode(this.$store.getters.nodeContext.id)
         .then(() => {
           // NOTE: can dispatch directly from here because report ID isn't needed

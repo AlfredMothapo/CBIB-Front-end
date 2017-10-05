@@ -36,7 +36,8 @@ export default {
   watch: {
     userContext(state) {
       if (state && state.state === contextState.UPDATE) {
-        // fetch report when updating
+        // NOTE: Not implemented for DEMO
+        // fetch user when updating
         getUser(state.id)
           .then((user) => {
             const level = (typeof user.access_id !== 'string') ? user.access_id.toString(10) : user.access_id;
@@ -50,6 +51,7 @@ export default {
   },
   methods: {
     submit() {
+      // confirm validity of data and show success or confirmation dialog
       const valid = (this.user.email && this.user.first_name && this.user.last_name);
       if (valid && this.user.email !== '' && this.user.first_name !== '' && this.user.last_name !== '') {
         this.$store.dispatch('changeConfirmationDialog', contextState.CONFIRMUSER);
@@ -59,7 +61,7 @@ export default {
     },
     modify() {
       if (this.userContext.state === contextState.CREATE) {
-        // console.log('post', this.user);
+        // add new user on create
         postUser(this.user)
           .then(() => {
             this.close();
@@ -67,7 +69,8 @@ export default {
           // NOTE: Need generic error dialog
           .catch(() => this.$store.dispatch('changeConfirmationDialog', contextState.ERROR));
       } else {
-        // console.log('update', this.user);
+        // NOTE: not implemented for DEMO
+        // updater user on update
         updateUser(this.user)
           .then(() => {
             this.close();
@@ -75,9 +78,11 @@ export default {
       }
     },
     clear() {
+      // close confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     close() {
+      // clear form and close user-modify-dialog
       this.$refs.form.clear();
       this.$store.dispatch('changeUserContext', null);
     },

@@ -1,3 +1,5 @@
+<!-- report-confirm-clear-dialog-->
+
 <template>
   <v-dialog persistent v-model="showDialog">
     <v-card class="text-xs-center">
@@ -15,11 +17,6 @@ import { contextState } from '../../state-machine';
 export default {
 
   name: 'confirm-clear-dialog',
-  data() {
-    return {
-      // nothing for now
-    };
-  },
   computed: {
     ...mapState({
       showDialog: state => state.confirmationDialog === contextState.CONFIRMREPORTCLEAR,
@@ -27,9 +24,11 @@ export default {
   },
   methods: {
     close() {
+      // close confirmation dialog
       this.$store.dispatch('changeConfirmationDialog', null);
     },
     clearReport() {
+      // fire parent clear in report-modify-dialog
       this.$emit('clear');
     },
   },

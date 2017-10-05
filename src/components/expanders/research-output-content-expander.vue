@@ -28,7 +28,6 @@
 import VueUploadComponent from 'vue-upload-component';
 
 export default {
-
   name: 'research-output-content-expander',
   props: ['report'],
   data() {
@@ -40,6 +39,7 @@ export default {
   },
   computed: {
     blob() {
+      // get blob from file
       return this.files[0].blob;
     },
   },
@@ -48,13 +48,8 @@ export default {
       // clear form data
       this.$refs.contentform.reset();
     },
-    /**
-    * Has changed
-    * @param  Object|undefined   newFile   Read only
-    * @param  Object|undefined   oldFile   Read only
-    * @return undefined
-    */
     inputFile(newFile, oldFile) {
+    // change files when new file is selected
       if (newFile && oldFile && !newFile.active && oldFile.active) {
         // Get response data
         console.log('response', newFile.response);
@@ -65,21 +60,14 @@ export default {
         }
       }
     },
-    /**
-     * Pretreatment
-     * @param  Object|undefined   newFile   Read and write
-     * @param  Object|undefined   oldFile   Read only
-     * @param  Function           prevent   Prevent changing
-     * @return undefined
-     */
     inputFilter(newFile, oldFile, prevent) {
+      // add filters to input types
       if (newFile && !oldFile) {
         // Filter non-image file
         if (!/\.(jpeg|jpe|jpg|gif|png|webp|pdf)$/i.test(newFile.name)) {
           return prevent();
         }
       }
-
       // Create a blob field
       newFile.blob = '';
       const URL = window.URL || window.webkitURL;
@@ -96,10 +84,7 @@ export default {
       }
     },
     blob() {
-      // handler() {
-      //   this.report.pdf_link = this.blob;
-      // },
-      // deep: true,
+      // update pdf_link on report based on file blob change
       this.report.pdf_link = this.blob;
     },
   },

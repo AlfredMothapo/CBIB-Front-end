@@ -59,7 +59,6 @@ export default {
     searchInputLocal: '',
   }),
   components: {
-
     appSideMenuList,
     appNavDrawerList,
     loginDialog,
@@ -79,25 +78,27 @@ export default {
     },
   },
   methods: {
-    changeReportContext() {
-      // toggle report-create0dialog
-      this.$store.dispatch('changeReportContext', { id: null, state: contextState.CREATE });
+    changeReportContext(state) {
+      // toggle report-create-dialog
+      this.$store.dispatch('changeReportContext', { id: null, state });
     },
     changeUserContext(state) {
-      // toggle report-create0dialog
-      this.$store.dispatch('changeUserContext', {id: null, state });
+      // toggle user-create-dialog
+      this.$store.dispatch('changeUserContext', { id: null, state });
     },
     changeNodeContext(state) {
-      // toggle report-create0dialog
+      // toggle node-create-dialog
       this.$store.dispatch('changeNodeContext', { id: null, state });
     },
     searchOnEnter() {
+      // fire search
       this.$store.dispatch('changeSearchInput', this.searchInputLocal);
       this.$router.push('/search');
     },
     add() {
+      // open dialog based on context of add button determined by current route
       if (this.$route.path === '/' || this.$route.path === '/search' || this.$route.path === '/report') {
-        this.changeReportContext();
+        this.changeReportContext(contextState.CREATE);
       } else if (this.$route.path === '/manage-users') {
         this.changeUserContext(contextState.CREATE);
       } else if (this.$route.path === '/manage-nodes') {
@@ -108,6 +109,7 @@ export default {
 };
 </script>
 <style>
+/* Basic Custom Styles */
   .list__tile__title {
     font-weight: 400;
     color: black !important;

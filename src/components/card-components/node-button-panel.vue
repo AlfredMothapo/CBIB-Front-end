@@ -1,5 +1,5 @@
 <!-- node-button-panel -->
-
+<!-- NB: Not used in Demo-->
 <template id="node-button-panel">
   <v-card flat>
     <v-layout row>

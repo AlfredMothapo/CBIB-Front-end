@@ -11,7 +11,7 @@ export function getUsers() {
 }
 
 export function getUsersWithNodes() {
-  // returns an array of user objects
+  // returns an array of user objects with mapped node names
   return axios
     .get('http://localhost:3000/get-users')
     .then(results =>
@@ -26,7 +26,7 @@ export function getUsersWithNodes() {
 }
 
 export function getAuthorName(id) {
-  // returns an array of user objects
+  // returns the concatenated name of a user based on id
   return axios
     .get(`http://localhost:3000/get-user/${id}`)
     .then((result) => {
@@ -38,6 +38,7 @@ export function getAuthorName(id) {
 }
 
 export function getCoAuthorNames(id) {
+  // returns the concatenated string of all names of a users based on ids
   if (id) {
     const array = id.split(',');
     return getUsers()
@@ -57,6 +58,7 @@ export function getCoAuthorNames(id) {
 }
 
 export function postUser(data) {
+  // posts a new user
   return axios
     .post('http://localhost:3000/create-user', {
       first_name: data.first_name,
@@ -80,6 +82,8 @@ export function postUser(data) {
 }
 
 export function deleteUser(data) {
+  // deletes a user
+  // NOTE: not implemented for DEMO
   console.log(data);
   // const _data = cloneObject(data);
   // const index = users.findIndex(x => x.id === _data);
@@ -92,6 +96,7 @@ export function deleteUser(data) {
 }
 
 export function getUser(id) {
+  // returns a normalised user by id
   return axios
     .get(`http://localhost:3000/get-user/${id}`)
     .then(response => response.data)
@@ -99,6 +104,7 @@ export function getUser(id) {
 }
 
 export function updateUser(data) {
+  // updates a user by id
   const id = data.user_id;
   return axios
     .post(`http://localhost:3000/update-user/${id}`,
@@ -115,6 +121,7 @@ export function updateUser(data) {
 }
 
 export function newUser() {
+  // returns default blank new user
   return {
     first_name: '',
     last_name: '',

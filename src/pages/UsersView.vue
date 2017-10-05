@@ -39,6 +39,7 @@ export default {
   },
   watch: {
     userContext(state) {
+      // watch user context to refresh user list with Node Names
       if (state === null) {
         getUsersWithNodes()
           .then((users) => {
@@ -48,7 +49,9 @@ export default {
     },
   },
   mounted() {
-    // get reports to display in report-list
+    // get user to display in user-list
+    // change search input to nothing
+    // change Add button tooltip
     getUsersWithNodes()
       .then((users) => {
         this.users = users;

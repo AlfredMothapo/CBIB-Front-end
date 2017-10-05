@@ -14,13 +14,13 @@ export default new Vuex.Store({
     loggedIn: false,
     // defines access level (and hence detailed/not detailed views)
     accessLevel: 0,
-    // current viewable report id - TODO: change to ReportContext
+    // current viewable context
     reportContext: null, // { id: 123, state: 'update' }
     userContext: null, // { id: 123, state: 'update' }
     nodeContext: null, // { id: 123, state: 'update' }
     // currently showing modal dialog
     modalDialog: null,
-    // toggles user-modify-dialog
+    // currently showing confirmation dialog
     confirmationDialog: null,
     // toggles login-dialog
     logInDialog: true,
@@ -31,6 +31,7 @@ export default new Vuex.Store({
     buttonDetails: false,
     // search input from search bar
     searchInput: '',
+    // default tooltip
     toolTip: 'Add Report',
   },
   getters: {

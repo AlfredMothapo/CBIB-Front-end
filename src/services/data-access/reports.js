@@ -7,7 +7,7 @@ import { getVerificationDetails } from './helpers';
 import { getPublicationType } from './publication-types';
 
 export function getDetailedResearchOutputs() {
-  // return and array of research outpus objects with details
+  // return and array of research outputs objects with mapped UI friendly details
   return axios
     .get('http://localhost:3000/detailed-research-outputs')
     .then(outputs => Promise.all(
@@ -33,6 +33,7 @@ export function getDetailedResearchOutputs() {
 }
 
 export function getBasicResearchOutputs() {
+  // returns an array of UI friendly basic research outputs (no verification details)
   return axios
     .get('http://localhost:3000/basic-research-outputs')
     .then(outputs => Promise.all(
@@ -56,6 +57,7 @@ export function getBasicResearchOutputs() {
 }
 
 export function postResearchOutput(data) {
+  // posts a new research ouput
   return axios
     .post('http://localhost:3000/outputs',
       {
@@ -75,6 +77,7 @@ export function postResearchOutput(data) {
 }
 
 export function deleteResearchOutput(data) {
+  // deletes the research output at a given id
   return axios
     .delete(`http://localhost:3000/delete-research-output/${data}`)
     .then(response => console.log(response.status))
@@ -82,6 +85,7 @@ export function deleteResearchOutput(data) {
 }
 
 export function updateResearchOutput(data) {
+  // updates the research output at a given id
   const id = data.id;
   return axios
     .post(`http://localhost:3000/update-research-output/${id}`, {
@@ -103,7 +107,7 @@ export function updateResearchOutput(data) {
 
 export function getResearchOutputsSearch(search) {
   // returns a list of research outputs based on search
-  // NB: Doesn't work yet
+  // NB: Not implemented for DEMO
   return getDetailedResearchOutputs()
     .then((reports) => {
       const result = [];
@@ -122,8 +126,8 @@ export function getResearchOutputsSearch(search) {
 }
 
 export function newReport() {
+  // returns a default new research output
   return {
-    // dialog: false,
     title: '',
     type: null,
     publication_year: null,
@@ -138,6 +142,7 @@ export function newReport() {
 }
 
 export function getReport(id) {
+  // returns a research output by id, UI friendly
   return axios
     .get(`http://localhost:3000/detailed-research-output/${id}`)
     .then(output => output.data)
@@ -158,6 +163,17 @@ export function getReport(id) {
     .catch(error => console.log(error));
 }
 
+
+export function getNormalizedReport(id) {
+  // returns detailed research output given id, with id's not UI friendly data
+  return axios
+    .get(`http://localhost:3000/detailed-research-output/${id}`)
+    .then(response => response.data)
+    .catch(error => console.log(error));
+}
+
+// NOTE: old methods used for mocked data
+// commented out basic research output
 //   return axios
 //     .get(`http://localhost:3000/basic-research-output/${id}`)
 //     .then(output =>
@@ -173,30 +189,23 @@ export function getReport(id) {
 //     .catch(error => console.log(error));
 // }
 
-export function getDetailedReport(id) {
-  return axios
-    .get(`http://localhost:3000/detailed-research-output/${id}`)
-    .then(output =>
-      Promise.all([
-        getAuthorName(output.author),
-        getPublicationType(output.type),
-        getNodeName(output.node),
-        getVerificationDetails(output),
-      ])
-        .then(([author, type, node, verificationDetails]) => {
-          output.author = author;
-          output.type = type;
-          output.node = node;
-          output.proof_verified = verificationDetails;
-          return output;
-        }))
-    .catch(error => console.log(error));
-}
-
-export function getNormalizedReport(id) {
-  // returns report given id
-  return axios
-    .get(`http://localhost:3000/detailed-research-output/${id}`)
-    .then(response => response.data)
-    .catch(error => console.log(error));
-}
+// export function getDetailedReport(id) {
+//   // returns a 
+//   return axios
+//     .get(`http://localhost:3000/detailed-research-output/${id}`)
+//     .then(output =>
+//       Promise.all([
+//         getAuthorName(output.author),
+//         getPublicationType(output.type),
+//         getNodeName(output.node),
+//         getVerificationDetails(output),
+//       ])
+//         .then(([author, type, node, verificationDetails]) => {
+//           output.author = author;
+//           output.type = type;
+//           output.node = node;
+//           output.proof_verified = verificationDetails;
+//           return output;
+//         }))
+//     .catch(error => console.log(error));
+// }
